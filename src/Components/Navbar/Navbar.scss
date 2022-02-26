@@ -1,0 +1,23 @@
+li {
+  list-style: none;
+}
+
+.navbar {
+  grid-area: n;
+  background-color: rgb(71, 143, 182);
+  &__item {
+    background-color: rgb(25, 114, 155);
+    &:hover {
+      background-color: rgb(8, 17, 148);
+    }
+  }
+  &__link {
+    color: white;
+    text-decoration: none;
+    padding-left: 10px;
+  
+  }
+  &_active {
+    color: green;
+  }
+}
