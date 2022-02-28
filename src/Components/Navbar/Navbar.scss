@@ -15,9 +15,8 @@ li {
     color: white;
     text-decoration: none;
     padding-left: 10px;
-  
   }
-  &_active {
-    color: green;
+  &__link.active {
+    color: rgb(128, 0, 6)
   }
 }

@@ -1,0 +1,9 @@
+.dialogs {
+  display: flex;
+  &__userlist {
+    margin-right: 50px;
+  }
+  &__button {
+    display: flex;
+  }
+}
