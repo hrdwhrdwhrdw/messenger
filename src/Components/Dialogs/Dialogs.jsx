@@ -2,13 +2,20 @@ import React from "react";
 import DialogsItem from "./DialogsItem/DialogsItem";
 import DialogsUserItem from "./DialogsUserItem/DialogsUserItem";
 import "./Dialogs.scss";
-import { createRef } from "react";
+import {
+  addMessageActionCreator,
+  updateMessageTextActionCreator,
+} from "../../redux/dialogs-reducer";
 
 export const Dialogs = (props) => {
-  let newMessageText = createRef();
-
   let sendMessage = () => {
-    alert(newMessageText.current.value);
+    props.dispatch(addMessageActionCreator());
+  };
+
+  let updateMessageText = (e) => {
+    let messageText = e.target.value;
+    let action = updateMessageTextActionCreator(messageText);
+    props.dispatch(action);
   };
 
   return (
@@ -32,14 +39,21 @@ export const Dialogs = (props) => {
             />
           ))}
         </ul>
-        <textarea name="" id="" cols="25" rows="4" ref={newMessageText} />
+        <textarea
+          name=""
+          id=""
+          cols="25"
+          rows="4"
+          onChange={updateMessageText}
+          value={props.dialogsPage.messageText}
+        />
         <div className="dialogs__button">
           <div className="dialogs__button dialogs__button_send">
             <button onClick={sendMessage}>Send message</button>
           </div>
-          <div className="dialogs__button dialogs__button_edit">
-            <button onClick={sendMessage}>Edit message</button>
-          </div>
+          {/* <div className="dialogs__button dialogs__button_edit">
+            <button onClick={editMessage}>Edit message</button>
+          </div> */}
         </div>
       </div>
     </div>
