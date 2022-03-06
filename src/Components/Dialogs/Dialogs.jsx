@@ -11,7 +11,7 @@ export const Dialogs = (props) => {
   return (
     <div className="dialogs">
       <ul className="dialogs__userlist">
-        {props.state.dialogsUsers.map((dialogUser) => (
+        {props.dialogsPage.dialogsUsers.map((dialogUser) => (
           <DialogsUserItem
             id={dialogUser.id}
             name={dialogUser.name}
@@ -21,7 +21,7 @@ export const Dialogs = (props) => {
       </ul>
       <div className="dialogs__list">
         <ul className="dialogs__messagelist">
-          {props.state.dialogsMessage.map((dialogMessage) => (
+          {props.dialogsPage.dialogsMessage.map((dialogMessage) => (
             <DialogsItem
               id={dialogMessage.id}
               message={dialogMessage.message}
@@ -35,7 +35,7 @@ export const Dialogs = (props) => {
           cols="25"
           rows="4"
           onChange={updateMessageText}
-          value={props.state.messageText}
+          value={props.dialogsPage.messageText}
         />
         <div className="dialogs__button">
           <div className="dialogs__button dialogs__button_send">

@@ -11,6 +11,10 @@ export default function MyPosts(props) {
     props.onChangePostText(postText)
   }
 
+  let addPost = () => {
+    props.addPost();
+  }
+
   return (
     <div className="profile__posts">
       <textarea
@@ -20,19 +24,16 @@ export default function MyPosts(props) {
         rows="3"
         placeholder="add new post..."
         ref={newPostValue}
-        value={props.state.postText}
+        value={props.profilePage.postText}
         onChange={onChangePostText}
       />
       <div className="posts__buttons">
-        <button className="posts__buttons posts_buttons_add_button" onClick={props.addPost}>
+        <button className="posts__buttons posts_buttons_add_button" onClick={addPost}>
           Add post
-        </button>
-        <button className="posts__buttons posts_buttons_delete_button">   
-          Delete post
         </button>
       </div>
       <ul className="profile__postlist">
-        {props.state.posts.map((post) => (
+        {props.profilePage.posts.map((post) => (
           <Post key={post.id} id={post.id} message={post.message} />
         ))}
       </ul>
