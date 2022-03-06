@@ -1,0 +1,11 @@
+.user {
+  &__item {
+    display: flex;
+  }
+  &__image {
+    width: 100px;
+  }
+  &__info {
+    margin-left: 10px;
+  }
+}
