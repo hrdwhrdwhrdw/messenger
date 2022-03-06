@@ -36,7 +36,7 @@ export const Users = (props) => {
         firstName: "Dmitry",
         lastName: "Combarov",
         image:
-        "https://avatars.mds.yandex.net/i?id=97ab89d5b25d982ea3f7c1836b8a0359-5477525-images-thumbs&n=13&exp=1",
+          "https://avatars.mds.yandex.net/i?id=97ab89d5b25d982ea3f7c1836b8a0359-5477525-images-thumbs&n=13&exp=1",
         followed: true,
         location: { country: "Russia", city: "Moscow" },
       },
@@ -60,10 +60,27 @@ export const Users = (props) => {
               <img src={user.image} alt="" className="user__image" />
             </div>
             <div className="user__info">
-              <div className="user__firstname"><span>Name:</span>{user.firstName}</div>
-              <div className="user__lastname"><span>Surname:</span>{user.lastName}</div>
-              <div className="user__country"><span>Country:</span>{user.location.country}</div>
-              <div className="user__city"><span>City:</span>{user.location.city}</div>
+              <div className="user__firstname">
+                <span>Name:</span>
+                {user.firstName}
+              </div>
+              <div className="user__lastname">
+                <span>Surname:</span>
+                {user.lastName}
+              </div>
+              <div className="user__country">
+                <span>Country:</span>
+                {user.location.country}
+              </div>
+              <div className="user__city">
+                <span>City:</span>
+                {user.location.city}
+              </div>
+              {user.followed ? (
+                <button onClick={() => props.unfollow(user.id)}>Unfollow</button>
+              ) : (
+                <button onClick={() => props.follow(user.id)}>Follow</button>
+              )}
             </div>
           </div>
         );
