@@ -3,10 +3,10 @@ import MyPostsContainer from './MyPosts/MyPostsContainer';
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import './Profile.scss';
 
-export default function Profile() {
+export default function Profile(props) {
   return (
     <div className="profile">
-      <ProfileInfo />
+      <ProfileInfo {...props} profile={props.profile} />
       <MyPostsContainer />
     </div>
   );

@@ -3,9 +3,14 @@
     display: flex;
   }
   &__image {
-    width: 100px;
+    width: 50px;
+    border-radius: 50%;
   }
   &__info {
     margin-left: 10px;
   }
+}
+
+.active {
+  font-weight: bold;
 }

@@ -12,6 +12,9 @@ export default function Navbar() {
           <NavLink to="dialogs" className='navbar__link'>Dialogs</NavLink>
         </li>
         <li className='navbar__item'>
+          <NavLink to="users" className='navbar__link'>Users</NavLink>
+        </li>
+        <li className='navbar__item'>
           <NavLink to="music" className='navbar__link'>Music</NavLink>
         </li>
         <li className='navbar__item'>
