@@ -1,7 +1,8 @@
 import React from "react";
 import "./Users.scss";
 import defaultUserPhoto from "./../../assets/images/i.webp";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Users(props) {
   let pages = [];
@@ -11,18 +12,6 @@ export default function Users(props) {
   }
   return (
     <div className="users__list">
-      {pages.map((page) => {
-        return (
-          <button
-            className={page === props.currentPage ? "active" : ""}
-            onClick={(e) => props.onPageChange(page)}
-            key={page}
-          >
-            {page}
-          </button>
-        );
-      })}
-
       {props.users.map((user) => {
         return (
           <div key={user.id} className="user__item">
@@ -43,14 +32,64 @@ export default function Users(props) {
                 <span>{user.status}</span>
               </div>
               {user.followed ? (
-                <button onClick={() => props.unfollow(user.id)}>
+                <button
+                  onClick={() => {
+                    axios
+                      .delete(
+                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                        {
+                          withCredentials: true,
+                          headers: {
+                            "api-key": "2ceedb20-1f52-4708-8d28-4499accddde8",
+                          },
+                        }
+                      )
+                      .then((response) => {
+                        if (response.data.resultCode === 0) {
+                          props.unfollow(user.id);
+                        }
+                      });
+                  }}
+                >
                   Unfollow
                 </button>
               ) : (
-                <button onClick={() => props.follow(user.id)}>Follow</button>
+                <button
+                  onClick={() => {
+                    axios
+                      .post(
+                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                        {},
+                        {
+                          withCredentials: true,
+                          headers: {
+                            "api-key": "2ceedb20-1f52-4708-8d28-4499accddde8",
+                          }
+                        }
+                      )
+                      .then((response) => {
+                        if (response.data.resultCode === 0) {
+                          props.follow(user.id);
+                        }
+                      });
+                  }}
+                >
+                  Follow
+                </button>
               )}
             </div>
           </div>
+        );
+      })}
+      {pages.map((page) => {
+        return (
+          <button
+            className={page === props.currentPage ? "active" : ""}
+            onClick={(e) => props.onPageChange(page)}
+            key={page}
+          >
+            {page}
+          </button>
         );
       })}
     </div>

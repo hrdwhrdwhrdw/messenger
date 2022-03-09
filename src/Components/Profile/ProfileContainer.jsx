@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 class ProfileContainer extends Component {
   componentDidMount() {
-    let userId = this.props.params.userId ? this.props.params.userId : "344";
+    let userId = this.props.params.userId ? this.props.params.userId : "6411";
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
       .then((response) => {
