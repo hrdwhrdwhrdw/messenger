@@ -33,7 +33,11 @@ export default function Users(props) {
               </div>
               {user.followed ? (
                 <button
+                  disabled={props.followingInProgress.some(
+                    (id) => id === user.id
+                  )}
                   onClick={() => {
+                    props.followingInProgressToggle(true, user.id);
                     axios
                       .delete(
                         `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
@@ -47,15 +51,21 @@ export default function Users(props) {
                       .then((response) => {
                         if (response.data.resultCode === 0) {
                           props.unfollow(user.id);
+                          props.followingInProgressToggle(false, user.id);
                         }
                       });
+                    
                   }}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
+                  disabled={props.followingInProgress.some(
+                    (id) => id === user.id
+                  )}
                   onClick={() => {
+                    props.followingInProgressToggle(true, user.id);
                     axios
                       .post(
                         `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
@@ -64,14 +74,16 @@ export default function Users(props) {
                           withCredentials: true,
                           headers: {
                             "api-key": "2ceedb20-1f52-4708-8d28-4499accddde8",
-                          }
+                          },
                         }
                       )
                       .then((response) => {
                         if (response.data.resultCode === 0) {
                           props.follow(user.id);
+                          props.followingInProgressToggle(false, user.id);
                         }
                       });
+                    
                   }}
                 >
                   Follow
