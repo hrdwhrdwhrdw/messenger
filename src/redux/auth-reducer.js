@@ -1,3 +1,5 @@
+import AuthAPI from "../Components/API/AuthAPI";
+
 const SET_AUTH_DATA = "SET_AUTH_DATA";
 
 let initialState = {
@@ -15,7 +17,7 @@ export const authReducer = (state = initialState, action) => {
         userId: action.id,
         login: action.login,
         email: action.email,
-        isAuth: true
+        isAuth: true,
       };
     }
 
@@ -27,8 +29,15 @@ export const authReducer = (state = initialState, action) => {
 export const setAuthData = (id, login, email) => ({
   type: SET_AUTH_DATA,
   id,
-  login, 
-  email
+  login,
+  email,
 });
 
-
+export const getAuthData = () => {
+  return (dispatch) => {
+    AuthAPI.getOwnData().then((response) => {
+      let { id, login, email } = { ...response.data };
+      dispatch(setAuthData(id, login, email));
+    });
+  };
+};

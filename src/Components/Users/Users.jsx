@@ -2,7 +2,6 @@ import React from "react";
 import "./Users.scss";
 import defaultUserPhoto from "./../../assets/images/i.webp";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 export default function Users(props) {
   let pages = [];
@@ -37,24 +36,7 @@ export default function Users(props) {
                     (id) => id === user.id
                   )}
                   onClick={() => {
-                    props.followingInProgressToggle(true, user.id);
-                    axios
-                      .delete(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "api-key": "2ceedb20-1f52-4708-8d28-4499accddde8",
-                          },
-                        }
-                      )
-                      .then((response) => {
-                        if (response.data.resultCode === 0) {
-                          props.unfollow(user.id);
-                          props.followingInProgressToggle(false, user.id);
-                        }
-                      });
-                    
+                    props.unfollow(user.id)
                   }}
                 >
                   Unfollow
@@ -65,25 +47,7 @@ export default function Users(props) {
                     (id) => id === user.id
                   )}
                   onClick={() => {
-                    props.followingInProgressToggle(true, user.id);
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                        {},
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "api-key": "2ceedb20-1f52-4708-8d28-4499accddde8",
-                          },
-                        }
-                      )
-                      .then((response) => {
-                        if (response.data.resultCode === 0) {
-                          props.follow(user.id);
-                          props.followingInProgressToggle(false, user.id);
-                        }
-                      });
-                    
+                    props.follow(user.id)
                   }}
                 >
                   Follow
