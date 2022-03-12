@@ -3,15 +3,12 @@ import Profile from "./Profile";
 import { connect } from "react-redux";
 import { getProfileData } from "../../redux/profile-reducer";
 import { useParams } from "react-router-dom";
+import withAuthRedirect from "../HOC/withAuthRedirect";
+import { compose } from "redux";
 
 class ProfileContainer extends Component {
   componentDidMount() {
     let userId = this.props.params.userId ? this.props.params.userId : "6411";
-    // axios
-    //   .get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-    // .then((response) => {
-    //   this.props.setUserProfile(response.data);
-    // });
     this.props.getProfileData(userId);
   }
 
@@ -33,8 +30,8 @@ const withRouter = (WrappedComponent) => (props) => {
   return <WrappedComponent {...props} params={params} />;
 };
 
-const withUrlProfileContainer = withRouter(ProfileContainer);
-
-export default connect(mapStateToProps, { getProfileData })(
-  withUrlProfileContainer
-);
+export default compose(
+  connect(mapStateToProps, { getProfileData }),
+  withRouter,
+  withAuthRedirect
+)(ProfileContainer);
