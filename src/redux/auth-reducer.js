@@ -31,7 +31,6 @@ export const setAuthData = (id, login, email) => ({
   id,
   login,
   email,
-  
 });
 
 export const getAuthData = () => {

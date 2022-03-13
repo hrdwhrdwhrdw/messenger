@@ -4,7 +4,9 @@ const AuthAPI = {
   getOwnData() {
     return instance
       .get(`auth/me`)
-      .then((response) => response.data);
+      .then((response) => {
+        return response.data
+      });
   },
 };
 

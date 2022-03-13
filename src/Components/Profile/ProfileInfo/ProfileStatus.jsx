@@ -13,41 +13,50 @@ export default class ProfileStatus extends Component {
       });
     }
   }
-  
+
   componentDidUpdate(prevProps) {
     if (prevProps.status !== this.props.status) {
       this.setState({
-        status: this.props.status
-      })
+        status: this.props.status,
+      });
     }
-  } 
+  }
 
   onStatusChange = (e) => {
     this.setState({
-      status: e.target.value
-    })
+      status: e.target.value,
+    });
   };
 
   activateEditMode = () => {
     this.setState({
-      editMode: true
-    })
-  }
+      editMode: true,
+    });
+  };
 
   deactivateEditMode = () => {
     this.setState({
-      editMode: false
-    })
-    this.props.updateStatus(this.state.status)
-  }
+      editMode: false,
+    });
+    this.props.updateStatus(this.state.status);
+  };
 
   render() {
     return (
       <div>
         {this.state.editMode ? (
-          <input type="text" value={this.state.status} autoFocus={true} onChange={this.onStatusChange} onBlur={this.deactivateEditMode}/>
+          <input
+            type="text"
+            value={this.state.status}
+            autoFocus={true}
+            onChange={this.onStatusChange}
+            onBlur={this.deactivateEditMode}
+          />
         ) : (
-          <span type="text" onChange={this.onStatusChange} onDoubleClick={this.activateEditMode}>
+          <span
+            onChange={this.onStatusChange}
+            onDoubleClick={this.activateEditMode}
+          >
             {this.props.status}
           </span>
         )}
