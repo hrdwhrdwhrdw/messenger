@@ -11,6 +11,7 @@ export default function Header(props) {
         />
         <div className="header__login">
           {!props.isAuth ? <Link to="/login">Login</Link> : `${props.login}`}
+          {props.isAuth ? <button to="/login" onClick={props.logout}>Logout</button> : null}
         </div>
       </header>
   )

@@ -2,12 +2,14 @@ import React from "react";
 import DialogsItem from "./DialogsItem/DialogsItem";
 import DialogsUserItem from "./DialogsUserItem/DialogsUserItem";
 import "./Dialogs.scss";
+import { reduxForm } from "redux-form";
+import { Field } from "redux-form";
+import { Textarea } from "../common/FormControl/FormControl";
 
 export const Dialogs = (props) => {
-  let updateMessageText = (e) => {
-    let messageText = e.target.value;
-    props.updateMessageText(messageText)
-  }
+  let addMessage = (values) => {
+    props.sendMessage(values.newMessageText);
+  };
   return (
     <div className="dialogs">
       <ul className="dialogs__userlist">
@@ -29,23 +31,33 @@ export const Dialogs = (props) => {
             />
           ))}
         </ul>
-        <textarea
-          name=""
-          id=""
-          cols="25"
-          rows="4"
-          onChange={updateMessageText}
-          value={props.dialogsPage.messageText}
-        />
-        <div className="dialogs__button">
-          <div className="dialogs__button dialogs__button_send">
-            <button onClick={props.sendMessage}>Send message</button>
-          </div>
-          {/* <div className="dialogs__button dialogs__button_edit">
-            <button onClick={editMessage}>Edit message</button>
-          </div> */}
-        </div>
+        <AddMessageReduxForm onSubmit={addMessage} />
       </div>
     </div>
   );
 };
+
+const AddMessageForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field
+        placeholder="...enter your message"
+        name="newMessageText"
+        component={Textarea}
+        dataType="textarea"
+      />
+      <div className="dialogs__button">
+        <div className="dialogs__button dialogs__button_send">
+          <button type="submit">Send message</button>
+        </div>
+        {/* <div className="dialogs__button dialogs__button_edit">
+            <button onClick={editMessage}>Edit message</button>
+          </div> */}
+      </div>
+    </form>
+  );
+};
+
+const AddMessageReduxForm = reduxForm({
+  form: "addMessage",
+})(AddMessageForm);
