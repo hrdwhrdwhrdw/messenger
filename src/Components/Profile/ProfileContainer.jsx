@@ -8,7 +8,10 @@ import { compose } from "redux";
 
 class ProfileContainer extends Component {
   componentDidMount() {
-    let userId = this.props.params.userId ? this.props.params.userId : "6411";
+    let userId = this.props.params.userId ? this.props.params.userId : this.props.authUserId;
+    if (!userId) {
+      this.props.params.history.push('/login')
+    }
     this.props.getProfileData(userId);
     this.props.getStatus(userId);
   }
@@ -24,10 +27,12 @@ class ProfileContainer extends Component {
 
 const mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
-  status: state.profilePage.status
+  status: state.profilePage.status,
+  authUserId: state.auth.userId,
+  isAuth: state.auth.isAuth
 });
 
-const withRouter = (WrappedComponent) => (props) => {
+export const withRouter = (WrappedComponent) => (props) => {
   const params = useParams();
   return <WrappedComponent {...props} params={params} />;
 };

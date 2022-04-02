@@ -19,7 +19,6 @@ let initialState = {
   status: ""
 };
 
-
 //switch-case reducer
 export const profileReducer = (state = initialState, action) => {
   switch (action.type) {

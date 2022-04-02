@@ -5,7 +5,7 @@ import { Field } from "redux-form";
 import { maxLengthCreator, required } from "../../utils/validation";
 import { Input } from "../common/FormControl/FormControl";
 
-const maxLength50 = maxLengthCreator(50)
+const maxLength50 = maxLengthCreator(50);
 
 function LoginForm(props) {
   return (
@@ -38,6 +38,7 @@ function LoginForm(props) {
         />
         remember me
       </div>
+      {props.error && <div className="summary">{props.error}</div>}
       <button type="submit">Login</button>
     </form>
   );
@@ -49,11 +50,11 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
   let onSubmit = (formData) => {
-    props.login(formData.login, formData.password, formData.remember)
+    props.login(formData.login, formData.password, formData.remember);
   };
-  
+
   if (props.isAuth) {
-    return <Navigate to="/profile"/>
+    return <Navigate to="/profile" />;
   }
   return (
     <div>
@@ -61,6 +62,6 @@ const Login = (props) => {
       <LoginReduxForm onSubmit={onSubmit} />
     </div>
   );
-}
+};
 
 export default Login;
