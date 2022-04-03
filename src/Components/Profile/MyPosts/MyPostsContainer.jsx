@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 
 let mapStateToProps = (state) => {
   return {
-    profilePage: state.profilePage
+    posts: state.profilePage.posts
   }
 }
 let mapDispatchToProps = (dispatch) => {

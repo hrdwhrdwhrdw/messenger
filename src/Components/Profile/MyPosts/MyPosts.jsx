@@ -15,7 +15,7 @@ export default function MyPosts(props) {
     <div className="profile__posts">
       <AddPostReduxForm onSubmit={addPost} />
       <ul className="profile__postlist">
-        {props.profilePage.posts.map((post) => (
+        {props.posts.map((post) => (
           <Post key={post.id} id={post.id} message={post.message} />
         ))}
       </ul>
