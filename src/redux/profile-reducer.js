@@ -16,7 +16,7 @@ let initialState = {
     { id: 5, message: "hello" },
   ],
   profile: null,
-  status: ""
+  status: "",
 };
 
 //switch-case reducer
@@ -60,7 +60,10 @@ export const profileReducer = (state = initialState, action) => {
 };
 
 // action-creator functions
-export const addPostActionCreator = (postText) => ({ type: ADD_NEW_POST, postText });
+export const addPostActionCreator = (postText) => ({
+  type: ADD_NEW_POST,
+  postText,
+});
 
 export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
@@ -73,22 +76,19 @@ export const setStatus = (status) => ({
 });
 
 // thunk-functions
-export const getProfileData = (userId) => (dispatch) => {
-  ProfileAPI.getUserData(userId).then((response) => {
-    dispatch(setUserProfile(response));
-  });
+export const getProfileData = (userId) => async (dispatch) => {
+  let response = await ProfileAPI.getUserData(userId);
+  dispatch(setUserProfile(response));
 };
 
-export const updateStatus = (status) => (dispatch) => {
-  ProfileAPI.updateStatus(status).then((response) => {
-    if (response.data.resultCode === 0) {
-      dispatch(setStatus(status));
-    }
-  });
+export const updateStatus = (status) => async (dispatch) => {
+  let response = await ProfileAPI.updateStatus(status);
+  if (response.data.resultCode === 0) {
+    dispatch(setStatus(status));
+  }
 };
 
-export const getStatus = (userId) => (dispatch) => {
-  ProfileAPI.getStatus(userId).then((response) => {
+export const getStatus = (userId) => async (dispatch) => {
+  let response = await ProfileAPI.getStatus(userId)
     dispatch(setStatus(response));
-  });
 };
