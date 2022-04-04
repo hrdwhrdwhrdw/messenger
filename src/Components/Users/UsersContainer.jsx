@@ -32,6 +32,7 @@ class UsersContainer extends Component {
             pageSize={this.props.pageSize}
             onPageChange={this.onPageChange}
             currentPage={this.props.currentPage}
+            portionSize={this.props.portionSize}
             follow={this.props.followUser}
             unfollow={this.props.unfollowUser}
             users={this.props.users}
@@ -49,6 +50,7 @@ let mapStateToProps = (state) => {
     pageSize: state.usersPage.pageSize,
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
+    portionSize: state.usersPage.portionSize,
     isFetching: state.usersPage.isFetching,
     followingInProgress: state.usersPage.followingInProgress
   };

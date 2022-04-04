@@ -2,13 +2,16 @@ import React from "react";
 import "./Users.scss";
 import defaultUserPhoto from "./../../assets/images/i.webp";
 import { Link } from "react-router-dom";
+import Pagination from "./Pagination";
 
-export default function Users(props) {
-  let pages = [];
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
+export default function Users({
+  totalUsersCount,
+  pageSize,
+  currentPage,
+  onPageChange,
+  portionSize,
+  ...props
+}) {
   return (
     <div className="users__list">
       {props.users.map((user) => {
@@ -36,7 +39,7 @@ export default function Users(props) {
                     (id) => id === user.id
                   )}
                   onClick={() => {
-                    props.unfollow(user.id)
+                    props.unfollow(user.id);
                   }}
                 >
                   Unfollow
@@ -47,7 +50,7 @@ export default function Users(props) {
                     (id) => id === user.id
                   )}
                   onClick={() => {
-                    props.follow(user.id)
+                    props.follow(user.id);
                   }}
                 >
                   Follow
@@ -57,17 +60,13 @@ export default function Users(props) {
           </div>
         );
       })}
-      {pages.map((page) => {
-        return (
-          <button
-            className={page === props.currentPage ? "active" : ""}
-            onClick={(e) => props.onPageChange(page)}
-            key={page}
-          >
-            {page}
-          </button>
-        );
-      })}
+      <Pagination
+        totalItemsCount={totalUsersCount}
+        pageSize={pageSize}
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+        portionSize={portionSize}
+      />
     </div>
   );
 }

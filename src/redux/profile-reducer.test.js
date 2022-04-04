@@ -17,6 +17,8 @@ test("post length should be 5", () => {
   expect(newState.posts.length).toBe(6);
 });
 
+
+
 test("post message should be correct", () => {
   let state = {
     posts: [
