@@ -7,7 +7,7 @@ import withAuthRedirect from "../HOC/withAuthRedirect";
 import { compose } from "redux";
 
 class ProfileContainer extends Component {
-  componentDidMount() {
+  refreshProfile() {
     let userId = this.props.params.userId ? this.props.params.userId : this.props.authUserId;
     if (!userId) {
       this.props.params.history.push('/login')
@@ -15,6 +15,17 @@ class ProfileContainer extends Component {
     this.props.getProfileData(userId);
     this.props.getStatus(userId);
   }
+
+  componentDidMount() {
+    this.refreshProfile()
+  }
+
+  componentDidUpdate(prevProps) { 
+    if (this.props.params.userId !== prevProps.params.userId) {
+      this.refreshProfile();
+    }
+  } 
+
 
   render() {
     return (

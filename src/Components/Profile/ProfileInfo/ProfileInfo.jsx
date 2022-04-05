@@ -6,6 +6,7 @@ export const ProfileInfo = (props) => {
   if (!props.profile) {
     return <Preloader />
   }
+  
   return (
     <div className="profile__info">
       <img src={props.profile.photos.large} alt="" />
