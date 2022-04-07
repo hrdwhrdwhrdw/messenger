@@ -12,6 +12,7 @@ export default function Profile(props) {
         status={props.status}
         updateStatus={props.updateStatus}
         updatePhoto={props.updatePhoto}
+        setProfile={props.setProfile}
       />
       <MyPostsContainer />
     </div>

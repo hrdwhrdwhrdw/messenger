@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import ProfileAPI from "../Components/API/ProfileAPI";
 
 // constants
@@ -6,6 +7,7 @@ const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const GET_STATUS = "GET_STATUS";
 const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
+const SAVE_PROFILE_INFO_SUCCESS = "SAVE_PROFILE_INFO_SUCCESS";
 
 // initial state
 let initialState = {
@@ -62,6 +64,13 @@ export const profileReducer = (state = initialState, action) => {
       };
     }
 
+    case SAVE_PROFILE_INFO_SUCCESS: {
+      return {
+        ...state,
+        profile: { ...action.profile}
+      };
+    }
+
     default:
       return state;
   }
@@ -88,6 +97,11 @@ export const savePhotoSuccess = (photos) => ({
   photos,
 });
 
+export const saveProfileInfoSuccess = (profile) => ({
+  type: SAVE_PROFILE_INFO_SUCCESS,
+  profile
+});
+
 // thunk-functions
 export const getProfileData = (userId) => async (dispatch) => {
   let response = await ProfileAPI.getUserData(userId);
@@ -110,5 +124,16 @@ export const updatePhoto = (file) => async (dispatch) => {
   let response = await ProfileAPI.savePhoto(file);
   if (response.data.resultCode === 0) {
     dispatch(savePhotoSuccess(response.data.data.photos));
+  }
+};
+
+export const setProfile = (profile) => async (dispatch, getState) => {
+  const userId = getState().auth.userId;
+  let response = await ProfileAPI.saveProfileInfo(profile);
+  if (response.data.resultCode === 0) {
+    dispatch(getProfileData(userId));
+  } else {
+    dispatch(stopSubmit("profile-desc", {_error: [...response.data.messages]}));
+    return Promise.reject();
   }
 };

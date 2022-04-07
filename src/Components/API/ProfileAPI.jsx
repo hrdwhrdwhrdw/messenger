@@ -21,6 +21,9 @@ const ProfileAPI = {
       },
     });
   },
+  saveProfileInfo(profile) {
+    return instance.put('profile', profile)
+  }
 };
 
 export default ProfileAPI;
