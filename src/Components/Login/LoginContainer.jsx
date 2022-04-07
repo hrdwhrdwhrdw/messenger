@@ -8,13 +8,14 @@ import { compose } from "redux";
 let mapStateToProps = (state) => {
   return {
     isAuth: state.auth.isAuth,
+    captcha: state.auth.captcha
   };
 };
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    login: (login, password, remember) => {
-      dispatch(loginUser(login, password, remember))
+    login: (login, password, remember, captcha) => {
+      dispatch(loginUser(login, password, remember, captcha))
     }
   }
 }

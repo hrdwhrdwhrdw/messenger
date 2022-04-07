@@ -39,6 +39,8 @@ function LoginForm(props) {
         remember me
       </div>
       {props.error && <div className="summary">{props.error}</div>}
+      {props.captcha && <img src={props.captcha} alt="" />}
+      {props.captcha && <Field name="captcha" dataType="input" component={Input} validate={[required]}/>}
       <button type="submit">Login</button>
     </form>
   );
@@ -48,9 +50,10 @@ const LoginReduxForm = reduxForm({
   form: "login",
 })(LoginForm);
 
+
 const Login = (props) => {
   const onSubmit = (formData) => {
-    props.login(formData.login, formData.password, formData.remember);
+    props.login(formData.login, formData.password, formData.remember, formData.captcha);
   };
 
   if (props.isAuth) {
@@ -59,7 +62,7 @@ const Login = (props) => {
   return (
     <div>
       <div>Login</div>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit} captcha={props.captcha}/>
     </div>
   );
 };
