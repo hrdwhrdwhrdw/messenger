@@ -1,5 +1,5 @@
 import { stopSubmit } from "redux-form";
-import ProfileAPI from "../Components/API/ProfileAPI";
+import { ProfileAPI } from "../Components/API/API";
 
 // constants
 const ADD_NEW_POST = "ADD_NEW_POST";
@@ -67,7 +67,7 @@ export const profileReducer = (state = initialState, action) => {
     case SAVE_PROFILE_INFO_SUCCESS: {
       return {
         ...state,
-        profile: { ...action.profile}
+        profile: { ...action.profile },
       };
     }
 
@@ -99,7 +99,7 @@ export const savePhotoSuccess = (photos) => ({
 
 export const saveProfileInfoSuccess = (profile) => ({
   type: SAVE_PROFILE_INFO_SUCCESS,
-  profile
+  profile,
 });
 
 // thunk-functions
@@ -133,7 +133,9 @@ export const setProfile = (profile) => async (dispatch, getState) => {
   if (response.data.resultCode === 0) {
     dispatch(getProfileData(userId));
   } else {
-    dispatch(stopSubmit("profile-desc", {_error: [...response.data.messages]}));
+    dispatch(
+      stopSubmit("profile-desc", { _error: [...response.data.messages] })
+    );
     return Promise.reject();
   }
 };
