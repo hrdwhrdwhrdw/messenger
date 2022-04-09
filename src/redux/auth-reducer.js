@@ -1,5 +1,5 @@
 import { stopSubmit } from "redux-form";
-import AuthAPI from "../Components/API/AuthAPI";
+import { AuthAPI } from "../Components/API/API";
 
 const SET_AUTH_DATA = "SET_AUTH_DATA";
 const SET_CAPTCHA_URL = "SET_CAPTCHA_URL";
@@ -24,7 +24,7 @@ export const authReducer = (state = initialState, action) => {
     case SET_CAPTCHA_URL: {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     }
 
