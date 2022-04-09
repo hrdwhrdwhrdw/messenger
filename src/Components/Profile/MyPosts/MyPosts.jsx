@@ -3,12 +3,15 @@ import Post from "./Post/Post";
 import "./MyPosts.scss";
 import { reduxForm } from "redux-form";
 import { Field } from "redux-form";
-import { maxLengthCreator, required } from "../../../utils/validation";
+import { maxLengthCreator } from "../../../utils/validation";
 import { Textarea } from "../../common/FormControl/FormControl";
 
 export default function MyPosts(props) {
   let addPost = (values) => {
-    props.addPost(values.newPost);
+    if (values.newPost) {
+      props.addPost(values.newPost);
+      props.resetForm();
+    }
   };
 
   return (
@@ -33,7 +36,7 @@ const AddPostForm = (props) => {
         cols="25"
         rows="3"
         placeholder="add new post..."
-        validate={[required, maxLength100]}
+        validate={[maxLength100]}
         component={Textarea}
         dataType="textarea"
       />

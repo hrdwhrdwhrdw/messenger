@@ -1,6 +1,6 @@
 import React, { Component, lazy, Suspense } from "react";
 import "./App.scss";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Preloader from "./Components/common/Preloader/Preloader";
@@ -30,6 +30,7 @@ class App extends Component {
             <Routes>
               <Route path="/dialogs" element={<DialogsContainer />} />
               <Route path="/profile/:userId" element={<ProfileContainer />} />
+              <Route path="/" element={<Navigate to="/profile" />} />
               <Route path="/profile/" element={<ProfileContainer />} />
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/login" element={<LoginContainer />} />
