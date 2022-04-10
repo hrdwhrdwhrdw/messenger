@@ -9,6 +9,7 @@ import { Textarea } from "../common/FormControl/FormControl";
 export const Dialogs = (props) => {
   let addMessage = (values) => {
     props.sendMessage(values.newMessageText);
+    props.reset();
   };
   return (
     <div className="dialogs">

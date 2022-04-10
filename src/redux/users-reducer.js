@@ -123,12 +123,12 @@ export const getUsers = (pageSize, currentPage) => async (dispatch) => {
   let data = await UsersAPI.getUsers(pageSize, currentPage);
   dispatch(isFetchingToggle(false));
   dispatch(setUsers(data.items));
-  dispatch(setTotalUsers(data.totalCount)); // replace to setUsers
+  dispatch(setTotalUsers(data.totalCount));
 };
 
 export const getUsersAfterChange =
   (pageSize, currentPage) => async (dispatch) => {
-    dispatch(setCurrentPage(currentPage)); // add this func
+    dispatch(setCurrentPage(currentPage));
     dispatch(isFetchingToggle(true));
     let data = await UsersAPI.getUsers(pageSize, currentPage);
     dispatch(isFetchingToggle(false));
