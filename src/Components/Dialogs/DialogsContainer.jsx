@@ -5,6 +5,7 @@ import {
 import { Dialogs } from "./Dialogs";
 import withAuthRedirect from "../HOC/withAuthRedirect"
 import { compose } from "redux";
+import { reset } from "redux-form";
 
 
 let mapStateToProps = (state) => {
@@ -17,6 +18,9 @@ let mapDispatchToProps = (dispatch) => {
   return {
     sendMessage: (messageText) => {
       dispatch(addMessageActionCreator(messageText))
+    },
+    reset: () => {
+      dispatch(reset("addMessage"))
     }
   }
 }
