@@ -4,9 +4,16 @@ import { NavLink } from "react-router-dom";
 const DialogsUserItem = (props) => {
   return (
     <li className="dialogs__useritem">
-      <NavLink to={props.id + ""}>{props.name}</NavLink>
+      <NavLink to={props.id + ""} className="useritem__link">
+        <img
+          className="useritem__image"
+          src="https://steamuserimages-a.akamaihd.net/ugc/1698402776116313451/993A8BB58E84D0960A398BF731A257A4DB09F261/"
+          alt=""
+        />
+        <span className="useritem__name">{props.name}</span>
+      </NavLink>
     </li>
   );
 };
 
-export default DialogsUserItem
+export default DialogsUserItem;

@@ -23,7 +23,7 @@ class UsersContainer extends Component {
 
   render() {
     return (
-      <div className="users__list">
+      <div className="user__container">
         {this.props.isFetching ? (
           <Preloader />
         ) : (

@@ -1,5 +1,8 @@
+import { IconButton } from "material-ui";
 import React from "react";
 import "./Post.scss";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 export default function Post(props) {
   return (
@@ -11,8 +14,26 @@ export default function Post(props) {
       />
       <div className="post__info">
         <div className="post__description">{props.message}</div>
-        <button className="post__button post__button_like">Like</button>
-        <button className="post__button post__button_dislike">Dislike</button>
+        <div className={"post__button-container" + (props.likesCount !== 0 ? ' wider' : '')}>
+          {!props.isLiked ? (
+            <IconButton
+              className="like-button"
+              onClick={() => props.increaseLikesCount(props.id)}
+            >
+              <FavoriteBorderIcon className="material-icons not-liked bouncy" />
+              <span className="like-overlay"></span>
+            </IconButton>
+          ) : (
+            <IconButton
+              className="like-button is-active"
+              onClick={() => props.decreaseLikesCount(props.id)}
+            >
+              <FavoriteIcon className="material-icons is-liked bouncy" />
+              <span className="like-overlay"></span>
+            </IconButton>
+          )}
+          {props.likesCount !== 0 && <span className={"post__like-counter" + (props.isLiked ? " liked" : "")}>{props.likesCount}</span>}
+        </div>
       </div>
     </div>
   );

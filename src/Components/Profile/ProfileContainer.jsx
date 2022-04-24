@@ -36,7 +36,7 @@ class ProfileContainer extends Component {
 
   render() {
     return (
-      <div className="profile">
+      <div className="profile__wrapper">
         <Profile
           isOwner={!this.props.params.userId}
           profile={this.props.profile}

@@ -1,26 +1,34 @@
 import MyPosts from "./MyPosts";
 import {
-  addPostActionCreator
+  addPostActionCreator,
+  increaseLikesCount,
+  decreaseLikesCount,
 } from "../../../redux/profile-reducer";
-import { connect} from "react-redux";
-import {reset} from 'redux-form';
+import { connect } from "react-redux";
+import { reset } from "redux-form";
 
 let mapStateToProps = (state) => {
   return {
-    posts: state.profilePage.posts
-  }
-}
+    posts: state.profilePage.posts,
+  };
+};
 let mapDispatchToProps = (dispatch) => {
   return {
     addPost: (postText) => {
-      dispatch(addPostActionCreator(postText))
+      dispatch(addPostActionCreator(postText));
     },
     resetForm: () => {
-      dispatch(reset("addPost"))
-    }
-  }
-}
+      dispatch(reset("addPost"));
+    },
+    increaseLikesCount: (id) => {
+      dispatch(increaseLikesCount(id));
+    },
+    decreaseLikesCount: (id) => {
+      dispatch(decreaseLikesCount(id));
+    },
+  };
+};
 
-let MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+let MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
-export default MyPostsContainer
+export default MyPostsContainer;

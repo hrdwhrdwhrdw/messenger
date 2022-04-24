@@ -1,18 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Header.scss'
+import React from "react";
+import { Link } from "react-router-dom";
+import CustomButton from "../common/Button/Button";
+import "./Header.scss";
 
 export default function Header(props) {
   return (
     <header className="header">
-        <img
-          src="http://www.alokatalog.com/Resimler/image/lova-hotel-logo_type_design_11.jpg"
-          alt=""
-        />
-        <div className="header__login">
+      <div className="header__login">
+        <span>
           {!props.isAuth ? <Link to="/login">Login</Link> : `${props.login}`}
-          {props.isAuth ? <button to="/login" onClick={props.logout}>Logout</button> : null}
-        </div>
-      </header>
-  )
+        </span>
+        {props.isAuth ? (
+          <CustomButton to="/login" onClick={props.logout}>Logout</CustomButton>
+        ) : null}
+      </div>
+    </header>
+  );
 }

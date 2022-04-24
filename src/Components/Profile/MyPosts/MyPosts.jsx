@@ -3,8 +3,9 @@ import Post from "./Post/Post";
 import "./MyPosts.scss";
 import { reduxForm } from "redux-form";
 import { Field } from "redux-form";
-import { maxLengthCreator } from "../../../utils/validation";
-import { Textarea } from "../../common/FormControl/FormControl";
+import { maxLengthCreator } from "../../../validation/validation";
+import { MultiTextarea } from "../../common/FormControl/FormControl";
+import CustomButton from "../../common/Button/Button";
 
 export default function MyPosts(props) {
   let addPost = (values) => {
@@ -14,12 +15,28 @@ export default function MyPosts(props) {
     }
   };
 
+  let increaseLikesCount = (id) => {
+    props.increaseLikesCount(id);
+  };
+
+  let decreaseLikesCount = (id) => {
+    props.decreaseLikesCount(id);
+  };
+
   return (
     <div className="profile__posts">
       <AddPostReduxForm onSubmit={addPost} />
       <ul className="profile__postlist">
         {props.posts.map((post) => (
-          <Post key={post.id} id={post.id} message={post.message} />
+          <Post
+            key={post.id}
+            id={post.id}
+            message={post.message}
+            likesCount={post.likesCount}
+            isLiked={post.isLiked}
+            increaseLikesCount={increaseLikesCount}
+            decreaseLikesCount={decreaseLikesCount}
+          />
         ))}
       </ul>
     </div>
@@ -31,22 +48,15 @@ const AddPostForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Field
+        className="posts__textarea"
         name="newPost"
-        id=""
-        cols="25"
-        rows="3"
-        placeholder="add new post..."
+        placeholder="type new post..."
         validate={[maxLength100]}
-        component={Textarea}
+        component={MultiTextarea}
         dataType="textarea"
       />
       <div className="posts__buttons">
-        <button
-          className="posts__buttons posts_buttons_add_button"
-          type="submit"
-        >
-          Add post
-        </button>
+        <CustomButton type="submit">Add post</CustomButton>
       </div>
     </form>
   );

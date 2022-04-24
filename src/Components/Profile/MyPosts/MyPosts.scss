@@ -7,3 +7,13 @@
     margin-top: 10px;
   }
 }
+
+.posts {
+  &__textarea {
+    margin-bottom: 10px;
+    padding: 7px;
+    border-bottom: 3px solid #7663fd;
+    border-radius: 5px;
+    background-color: rgb(231, 231, 231);
+  }
+}

@@ -9,10 +9,17 @@ import { setInitializing } from "./redux/app-reducer";
 import store from "./redux/redux-store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import PreloaderPage from "./Components/common/PreloaderPage.jsx/PreloaderPage";
 
 const UsersContainer = lazy(() => import("./Components/Users/UsersContainer"));
-const DialogsContainer = lazy(() => import("./Components/Dialogs/DialogsContainer"));
-const ProfileContainer = lazy(() => import("./Components/Profile/ProfileContainer"));
+const DialogsContainer = lazy(() =>
+  import("./Components/Dialogs/DialogsContainer")
+);
+const ProfileContainer = lazy(() =>
+  import("./Components/Profile/ProfileContainer")
+);
 const LoginContainer = lazy(() => import("./Components/Login/LoginContainer"));
 
 class App extends Component {
@@ -20,22 +27,24 @@ class App extends Component {
     this.props.setInitializing();
   }
   render() {
-    if (!this.props.initialized) return <Preloader />;
+    if (!this.props.initialized) return <PreloaderPage />;
     return (
       <div className="app-wrapper">
-        <HeaderContainer />
-        <Navbar />
-        <div className="app-wrapper__content">
-          <Suspense fallback={<Preloader />}>
-            <Routes>
-              <Route path="/dialogs" element={<DialogsContainer />} />
-              <Route path="/profile/:userId" element={<ProfileContainer />} />
-              <Route path="/" element={<Navigate to="/profile" />} />
-              <Route path="/profile/" element={<ProfileContainer />} />
-              <Route path="/users" element={<UsersContainer />} />
-              <Route path="/login" element={<LoginContainer />} />
-            </Routes>
-          </Suspense>
+        <div className="app-wrapper__container">
+          <HeaderContainer />
+          <Navbar />
+          <div className="app-wrapper__content">
+            <Suspense fallback={<Preloader />}>
+              <Routes>
+                <Route path="/dialogs" element={<DialogsContainer />} />
+                <Route path="/profile/:userId" element={<ProfileContainer />} />
+                <Route path="/" element={<Navigate to="/profile" />} />
+                <Route path="/profile/" element={<ProfileContainer />} />
+                <Route path="/users" element={<UsersContainer />} />
+                <Route path="/login" element={<LoginContainer />} />
+              </Routes>
+            </Suspense>
+          </div>
         </div>
       </div>
     );
@@ -48,8 +57,6 @@ let mapStateToProps = (state) => {
   };
 };
 
-window.store = store.getState();
-
 const AppContainer = connect(mapStateToProps, { setInitializing })(App);
 
 const MyApp = () => {
@@ -57,7 +64,9 @@ const MyApp = () => {
     <React.StrictMode>
       <BrowserRouter>
         <Provider store={store}>
-          <AppContainer />
+          <MuiThemeProvider muiTheme={getMuiTheme()}>
+            <AppContainer />
+          </MuiThemeProvider>
         </Provider>
       </BrowserRouter>
     </React.StrictMode>

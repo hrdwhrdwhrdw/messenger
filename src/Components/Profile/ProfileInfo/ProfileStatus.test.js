@@ -22,12 +22,12 @@ describe("ProfileStatus component", () => {
     const span = instance.findByType("span");
     expect(span).not.toBeNull();
   });
-  test("input value should be equal to span value after double clicking span", () => {
+  test("input value should be equal to span value after clicking span", () => {
     const component = create(<ProfileStatus status="status" />);
     const instance = component.root;
     // eslint-disable-next-line testing-library/await-async-query
     const span = instance.findByType("span");
-    span.props.onDoubleClick();
+    span.props.onClick();
     // eslint-disable-next-line testing-library/await-async-query
     const input = instance.findByType("input");
     expect(input.props.value).toBe("status");

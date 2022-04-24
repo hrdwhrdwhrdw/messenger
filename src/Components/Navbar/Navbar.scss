@@ -4,19 +4,40 @@ li {
 
 .navbar {
   grid-area: n;
-  background-color: rgb(71, 143, 182);
+  background: #191621;
+  height: 610px;
+  border-radius: 10px;
+  width: 180px;
+
   &__item {
-    background-color: rgb(25, 114, 155);
+    margin: 15px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+
     &:hover {
-      background-color: rgb(8, 17, 148);
+      background-color: #1c1c34;
+      border: 1px solid #584cbc;
+      transition: all 0.2s ease;
+      .navbar__link svg {
+        color: #7969ff;
+      }
     }
   }
+
   &__link {
     color: white;
     text-decoration: none;
-    padding-left: 10px;
-  }
-  &__link.active {
-    color: rgb(128, 0, 6)
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 12px 8px;
+    font-size: 14px;
+    svg {
+      font-size: 14px;
+    }
+
+    span {
+      margin-left: 15px;
+    }
   }
 }

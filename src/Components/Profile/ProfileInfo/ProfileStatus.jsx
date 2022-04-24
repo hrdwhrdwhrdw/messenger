@@ -1,66 +1,63 @@
-import React, { Component } from "react";
+import { Input } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
-export default class ProfileStatus extends Component {
-  state = {
-    editMode: false,
-    status: this.props.status,
+export default function ProfileStatus (props)  {
+  let [editMode, setEditMode] = useState(false);
+  let [status, setStatus] = useState(props.status);
+
+  useEffect(() => {
+    setStatus(props.status);
+  }, [props.status])
+
+  const onStatusChange = (e) => {
+    setStatus(e.currentTarget.value);
   };
 
-  componentDidMount() {
-    if (!this.props.status) {
-      this.setState({
-        status: "",
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.status !== this.props.status) {
-      this.setState({
-        status: this.props.status,
-      });
-    }
-  }
-
-  onStatusChange = (e) => {
-    this.setState({
-      status: e.target.value,
-    });
+  const activateEditMode = () => {
+    setEditMode(true);
   };
 
-  activateEditMode = () => {
-    this.setState({
-      editMode: true,
-    });
+  const deactivateEditMode = () => {
+    setEditMode(false);
+    props.updateStatus(status);
   };
 
-  deactivateEditMode = () => {
-    this.setState({
-      editMode: false,
-    });
-    this.props.updateStatus(this.state.status);
-  };
-
-  render() {
     return (
-      <div>
-        {this.state.editMode ? (
-          <input
+      <div className="profile__status-inner">
+        {props.isOwner ? (editMode ? (
+          <Input
+          sx={{
+            padding: "0 5px",
+            fontSize: "14px",
+            width: "100%",
+            color: "#61656e",
+            fontWeight: "bold",
+            backgroundColor: "#151922",
+            borderRadius: "5px",
+            border: "none",
+            ":before": {
+              display: "none",
+            },
+            "&::after": {
+              display: "none"
+            },
+          }}
             type="text"
-            value={this.state.status}
+            value={status}
             autoFocus={true}
-            onChange={this.onStatusChange}
-            onBlur={this.deactivateEditMode}
+            onChange={onStatusChange}
+            onBlur={deactivateEditMode}
+            {...props}
           />
         ) : (
-          <span
-            onChange={this.onStatusChange}
-            onDoubleClick={this.activateEditMode}
+          <div
+            onChange={onStatusChange}
+            onClick={activateEditMode}
+            style={{color: "#7663fd", backgroundColor: "#321738", padding: "4px", borderRadius: "5px"}}
           >
-            {this.props.status}
-          </span>
-        )}
+            {props.status || "set status"}
+          </div>
+        )) : <span>{props.status || "User has no status"}</span>}
       </div>
     );
-  }
 }

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Users.scss";
+import { Button} from "@material-ui/core";
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+
+import styles from "./Pagination.module.scss";
 
 const Pagination = ({
   totalItemsCount,
@@ -24,15 +27,26 @@ const Pagination = ({
   let rightPageNumberPortion = portionNumber * portionSize;
 
   return (
-    <div className="pagination">
-      {portionNumber > 1 && (
-        <button
+    <div className={styles.pagination}>
+      {portionNumber > 1 ? (
+        <Button
+          className={styles.button}
           onClick={() => {
             setPortionNumber(portionNumber - 1);
           }}
         >
-          Prev
-        </button>
+          <DoubleArrowIcon sx={{transform: "rotate(180deg)"}}/>
+        </Button>
+      ) : (
+        <Button
+          className={styles.button}
+          onClick={() => {
+            setPortionNumber(portionNumber - 1);
+          }}
+          disabled={true}
+        >
+          <DoubleArrowIcon sx={{transform: "rotate(180deg)"}}/>
+        </Button>
       )}
       {pages
         .filter(
@@ -40,23 +54,24 @@ const Pagination = ({
         )
         .map((p) => {
           return (
-            <button
-              className={p === currentPage ? "active" : ""}
+            <Button
+              className={p === currentPage ? [styles.button, styles.active].join(' ') : styles.button}
               onClick={(e) => onPageChange(p)}
               key={p}
             >
               {p}
-            </button>
+            </Button>
           );
         })}
       {portionNumber < portionCount && (
-        <button
+        <Button
+          className={styles.button}
           onClick={() => {
             setPortionNumber(portionNumber + 1);
           }}
         >
-          Next
-        </button>
+          <DoubleArrowIcon />
+        </Button>
       )}
     </div>
   );

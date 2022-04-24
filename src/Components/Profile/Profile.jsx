@@ -2,8 +2,12 @@ import React from "react";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import "./Profile.scss";
+import Preloader from "../common/Preloader/Preloader";
 
 export default function Profile(props) {
+  if (!props.profile) {
+    return <Preloader />;
+  }
   return (
     <div className="profile">
       <ProfileInfo

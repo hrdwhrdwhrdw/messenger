@@ -1,21 +1,29 @@
 .app-wrapper {
-  display: grid;
-  grid-template-rows: 60px 1fr ;
-  grid-template-columns: 2fr 10fr;
-  grid-template-areas: 
-  "h h"
-  "n c";
-  width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://phonoteka.org/uploads/posts/2022-01/1643015974_1-phonoteka-org-p-kartinki-na-zadnii-fon-1.png");
+  width: 100vw;
   height: 100vh;
+  &__container {
+    display: grid;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    grid-template-areas:
+      "h h"
+      "n c";
+    width: 1200px;
+    height: 700px;
+    margin: 0 auto;
+    padding: 12px;
+    background-color: #200e1c;
+    border: 3px solid #8169ff;
+    border-radius: 30px;
+    overflow: hidden;
+  }
   &__content {
     grid-area: c;
-    background-color: rgb(216, 102, 67);
-    padding: 10px;
+    height: 610px;
+    width:990px;
   }
-}
-
-ul {
-  margin: 0;
-  padding: 0;
 }

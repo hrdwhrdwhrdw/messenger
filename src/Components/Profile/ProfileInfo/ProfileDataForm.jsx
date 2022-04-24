@@ -1,38 +1,54 @@
+import React from "react";
 import { reduxForm } from "redux-form";
 import { Field } from "redux-form";
 import { Form } from "redux-form";
-import '../../common/FormControl/FormControl.scss';
+import "../../common/FormControl/FormControl.scss";
+import CustomButton from "../../common/Button/Button";
+import { CustomInput } from "../../common/FormControl/FormControl";
+import { renderIcons } from "./ProfileInfo";
+import Checkbox from "../../common/Checkbox/Checkbox";
 
 const ProfileDataForm = (props) => {
   return (
     <Form onSubmit={props.handleSubmit}>
-      {props.error && <div className="summary">{props.error.map(key => <div>{key}</div>)}</div>}
-      <div>
-        <b>Full Name:</b>
-        <Field name="fullName" component={"input"} />
+      {props.error && (
+        <div className="summary">
+          {props.error.map((key) => (
+            <div>{key}</div>
+          ))}
+        </div>
+      )}
+      <div className="profile__contact contact__item">
+        <span>Full Name:</span>
+        <Field name="fullName" component={CustomInput} />
+      </div>
+      <div className="profile__contact contact__item">
+        <span>Needs a job:</span>
+        <Checkbox name="lookingForAJob"/>
+      </div>
+      <div className="profile__contact contact__item">
+        <span>My skills:</span>
+        <Field name="lookingForAJobDescription" component={CustomInput} />
+      </div>
+      <div className="profile__contact contact__item">
+        <span>About me:</span>
+        <Field name="aboutMe" component={CustomInput} />
       </div>
       <div>
-        <b>Looking for a job:</b>
-        <Field name="lookingForAJob" component={"input"} type="checkbox" />
-      </div>
-      <div>
-        <b>My skills:</b>
-        <Field name="lookingForAJobDescription" component={"input"} />
-      </div>
-      <div>
-        <b>About me:</b>
-        <Field name="aboutMe" component={"input"} />
-      </div>
-      <div>
-        <b>My contacts:</b>
+        <span>My contacts:</span>
         {Object.keys(props.profile.contacts).map((key) => (
-          <div>
-            <b>{key}:</b>
-            <Field key={key} name={`contacts.${[key]}`} component={"input"} />
+          <div className="profile__contact contact__item">
+            {renderIcons(key)}
+            <span>{key}:</span>
+            <Field
+              key={key}
+              name={`contacts.${[key]}`}
+              component={CustomInput}
+            />
           </div>
         ))}
         <div>
-          <button type="submit">Save</button>
+          {props.isOwner && <CustomButton type="submit">Save</CustomButton>}
         </div>
       </div>
     </Form>

@@ -1,16 +1,29 @@
 .user {
+  &__container {
+    height: 610px;
+  }
   &__item {
     display: flex;
+    margin-bottom: 5px;
   }
   &__image {
-    width: 50px;
+    width: 65px;
     border-radius: 50%;
+    border: 2px solid #8169ff;
   }
   &__info {
     margin-left: 10px;
   }
-}
-
-.active {
-  font-weight: bold;
+  &__list {
+    height: 610px;
+    padding-top: 10px;
+    padding-left: 10px;
+    overflow-y: scroll;
+  }
+  &__name {
+    margin-bottom: 5px;
+  }
+  &__status {
+    margin-bottom: 5px;
+  }
 }

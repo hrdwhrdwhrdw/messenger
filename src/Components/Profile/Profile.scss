@@ -1,3 +1,207 @@
+.profile {
+  height: 610px;
+  padding-left: 10px;
+  overflow-y: scroll;
 
+  &__wrapper {
+    height: 610px;
+  }
 
+  &__photo {
+    &-image {
+      width: 340px;
+      border: 5px solid #7663fd;
+      border-radius: 20px;
+    }
+  }
 
+  &__info {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    height: 570px;
+
+    &-container {
+      margin-left: 175px;
+
+      span {
+        margin-right: 10px;
+        margin-left: 5px;
+      }
+    }
+
+    &__update-button {
+      font-weight: bold !important;
+
+    }
+  }
+
+  &__edit-button {
+    color: white;
+    padding: 6px;
+    min-width: 30px;
+    text-transform: capitalize;
+    border-radius: 10px;
+    border: 2px solid #7663fd;
+    margin-right: 10px;
+
+    &:hover {
+      background-color: #7663fd;
+    }
+  }
+
+  &__update-photo {
+    position: absolute;
+    top: 280px;
+    left: 100px;
+    button {
+      padding: 0;
+      width: 150px;
+      background-color: #7663fd;
+    }
+    label {
+      font-weight: bold !important;
+      text-transform: uppercase !important;
+      width: 140px;
+      padding: 3px;
+      margin: 0 !important;
+      cursor: pointer;
+    }
+  }
+
+  &__posts {
+    width: 50%;
+    margin-top: -20%;
+    &.higher {
+      margin-top: -14%;
+    }
+  }
+
+  &__post {
+    padding: 10px;
+    background-color: transparent;
+    background-color: #321738;
+    border-radius: 5px;
+  }
+
+  &__status {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 310px;
+    height: 20px;
+    margin-bottom: 15px;
+
+    &-inner {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.contact {
+  &__icon {
+    width: 20px;
+    height: 20px;
+
+    &_vk {
+      background: white;
+      border-radius: 50%;
+      padding: 2px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
+}
+
+.button-cover, .knobs, .layer
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button
+{
+    position: relative;
+    width: 40px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.button.r, .button.r .layer
+{
+    border-radius: 100px;
+}
+
+.button.b2
+{
+    border-radius: 2px;
+}
+
+.checkbox
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.knobs
+{
+    z-index: 2;
+}
+
+.layer
+{
+    width: 100%;
+    background-color: #ebf7fc;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+#button .knobs:before
+{
+  content: 'NO';
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  color: #fff;
+  font-size: 8px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+  padding: 3px 3px;
+  background-color: gray;
+  border-radius: 50%;
+  transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+}
+
+#button .checkbox:checked + .knobs:before
+{
+    content: 'YES';
+    left: 19px;
+    background-color: #7663fd;
+}
+
+#button .checkbox:checked ~ .layer
+{
+    background-color: #fcebeb;
+}
+
+#button .knobs, #button .knobs:before, #button .layer
+{
+    transition: 0.3s ease all;
+}
