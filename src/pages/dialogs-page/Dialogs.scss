@@ -1,0 +1,237 @@
+@import '../../constants/styles.scss';
+
+.dialogs {
+  display: flex;
+  height: 100%;
+
+  &__container {
+    width: 250px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 10px;
+    height: 100%;
+  }
+
+  &__userlist {
+    overflow-y: scroll;
+    margin-top: 15px;
+    padding-right: 10px;
+    height: 100%;
+
+    &-container {
+      height: calc(100% - 160px);
+    }
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid #292b38;
+    padding: 10px;
+  }
+
+  &__button {
+    display: flex;
+    border-left: 2px solid #292b38;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #1a141e;
+    border-radius: 10px;
+  }
+
+  &__title {
+    font-size: 1.2rem;
+  }
+
+  &__search {
+    margin-top: 20px;
+  }
+
+  &__switch {
+    display: flex;
+    border: 2px solid COLOR;
+    border-radius: 8px;
+    margin: 10px 0;
+    width: 100%;
+
+    button {
+      width: 33.333333%;
+      border: none !important;
+      margin: 3px;
+      border-radius: 5px !important;
+
+      :hover {
+        background-color: COLOR !important;
+      }
+    }
+  }
+
+  &__useritem {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #1f1321;
+  }
+
+  &__messagelist {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    padding-bottom: 20px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2d3341;
+    align-self: flex-end;
+    padding: 10px;
+    margin-bottom: 10px;
+    min-width: 70px;
+    max-width: 200px;
+    word-wrap: break-word;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 2px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 16px;
+
+    span {
+      width: 100%;
+    }
+  }
+}
+
+.useritem {
+  &__image {
+    width: 50px;
+    border-radius: 50%;
+  }
+
+  &__link {
+    display: flex;
+    padding: 5px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    transition: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    &:hover {
+      border: 1px solid COLOR;
+      background-color: $burgundy;
+    }
+  }
+
+  &__name {
+    margin-left: 10px;
+    font-weight: normal;
+    font-size: 12px;
+  }
+}
+
+.switch {
+  &__button {
+    padding: 6px;
+    background-color: transparent;
+  }
+
+  &__group-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .dialogs {
+    &__item {
+      padding: .4rem;
+      font-size: .8rem;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .dialogs {
+    &__container {
+      padding-top: 15px;
+    }
+
+    &__userlist {
+      height: 100%;
+
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .dialogs {
+    &__userlist {
+      &-container {
+        height: calc(95vh - 150px);
+      }
+    }
+
+    &__container {
+      width: 36%;
+    }
+
+    &__search {
+      input {
+        font-size: 0.5rem;
+        padding: 0;
+      }
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+
+    &__item {
+      font-size: .5rem;
+      min-width: 35px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 1px;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 10px;
+    }
+
+    &__useritem {
+      img {
+        width: 2rem;
+      }
+
+      span {
+        font-size: 8px;
+      }
+    }
+
+    &__button {
+      button {
+        height: 23px;
+        padding: 0;
+      }
+
+      span {
+        margin-right: 5px;
+      }
+
+      svg {
+        font-size: 10px !important;
+      }
+    }
+  }
+
+  .switch {
+    &__button {
+      font-size: 0.5rem;
+      padding: 2px;
+      margin: 2px !important;
+      min-width: 20px !important;
+
+    }
+  }
+}

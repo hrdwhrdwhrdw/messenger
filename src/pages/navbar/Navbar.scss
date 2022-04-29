@@ -1,0 +1,80 @@
+@import '../../constants/styles.scss';
+
+li {
+  list-style: none;
+}
+
+.navbar {
+  grid-area: n;
+  background: #191621;
+  height: calc(95vh - 60px);
+  max-height: 610px;
+  border-radius: 10px;
+  width: 100%;
+
+  &__item {
+    margin: 15px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 1rem;
+
+    &:hover {
+      background-color: #1c1c34;
+      border: 1px solid #584cbc;
+      transition: all 0.2s ease;
+
+      .navbar__link svg {
+        color: #7969ff;
+      }
+    }
+  }
+
+  &__link {
+    color: $white;
+    text-decoration: none;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 12px 8px;
+    font-size: 14px;
+
+    svg {
+      font-size: 14px;
+    }
+
+    span {
+      margin-left: 15px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    display: none;
+  }
+
+  .expand {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    li {
+      width: 100%;
+      margin: 0;
+      border-radius: 0;
+      border-bottom: 2px solid #7969ff;
+
+      &:first-child {
+        border-top: 2px solid #7969ff;
+      }
+
+      a {
+        justify-content: center;
+      }
+    }
+  }
+}

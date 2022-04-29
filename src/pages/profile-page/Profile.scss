@@ -1,0 +1,382 @@
+@import '../../constants/styles.scss';
+
+.profile {
+  height: 100%;
+  width: 100%;
+  padding-left: 10px;
+  overflow-y: scroll;
+
+  &__wrapper {
+    height: 100%;
+    width: 100%;
+  }
+
+  &__photo {
+    width: 40%;
+    position: relative;
+
+    &-image {
+      width: 100%;
+      max-width: 380px;
+      border: 5px solid $purple;
+      border-radius: 20px;
+    }
+  }
+
+  &__info {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    height: 570px;
+    width: 100%;
+
+    &-container {
+      margin-left: 5vw;
+      width: 40%;
+
+      span {
+        margin-right: 10px;
+        margin-left: 5px;
+      }
+    }
+
+    &__update-button {
+      font-weight: bold !important;
+    }
+  }
+
+  &__name {
+    font-size: 1.8rem !important;
+  }
+
+  &__edit-button {
+    color: $white;
+    padding: 6px;
+    min-width: 30px;
+    text-transform: capitalize;
+    border-radius: 10px;
+    border: 2px solid $purple;
+    margin-right: 10px;
+
+    &:hover {
+      background-color: $purple;
+    }
+  }
+
+  &__update-photo {
+    position: absolute;
+    width: 50%;
+    bottom: 20px;
+    left: 25%;
+
+    button {
+      padding: 0;
+      width: 100%;
+      background-color: $purple;
+    }
+
+    label {
+      font-weight: bold !important;
+      text-transform: uppercase !important;
+      width: 140px;
+      padding: 3px;
+      margin: 0 !important;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  }
+
+  &__posts {
+    width: 45%;
+    max-width: 500px;
+    margin-top: -18vh;
+
+    &.higher {
+      margin-top: -14%;
+    }
+  }
+
+  &__post {
+    padding: 10px;
+    background-color: transparent;
+    background-color: $burgundy;
+    border-radius: 5px;
+  }
+
+  &__status {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 95%;
+    height: 20px;
+    margin-bottom: 15px;
+
+    &-inner {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.contact {
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+
+    &_vk {
+      background: white;
+      border-radius: 50%;
+      padding: 2px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    height: 40px;
+
+    span {
+      font-size: 0.8rem;
+    }
+  }
+
+  &__title {
+    font-size: 1.2rem;
+  }
+}
+
+.button-cover,
+.knobs,
+.layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.button {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.button.r,
+.button.r .layer {
+  border-radius: 100px;
+}
+
+.button.b2 {
+  border-radius: 2px;
+}
+
+.checkbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.knobs {
+  z-index: 2;
+}
+
+.layer {
+  width: 100%;
+  background-color: #ebf7fc;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+
+#button .knobs:before {
+  content: 'NO';
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  color: $white;
+  font-size: 8px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+  padding: 3px 3px;
+  background-color: gray;
+  border-radius: 50%;
+  transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+}
+
+#button .checkbox:checked+.knobs:before {
+  content: 'YES';
+  left: 19px;
+  background-color: $purple;
+}
+
+#button .checkbox:checked~.layer {
+  background-color: #fcebeb;
+}
+
+#button .knobs,
+#button .knobs:before,
+#button .layer {
+  transition: 0.3s ease all;
+}
+
+@media (max-width: 1024px) {
+  .profile {
+    &__posts {
+      margin-top: calc(35vh - 450px);
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .profile {
+    &__update-photo {
+      label {
+        font-size: 8px;
+      }
+    }
+
+    &__posts {
+      margin-top: -300px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .profile {
+    &__posts {
+      margin-top: -270px;
+    }
+
+    &__post {
+      .wider {
+        width: 3rem;
+      }
+    }
+
+    &__info {
+      &-container {
+        margin-left: 10vw;
+
+        svg {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    &__contacts {
+      svg.contact__icon {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .profile {
+    &__posts {
+      margin-top: -55vh;
+
+      textarea {
+        font-size: 0.5rem;
+      }
+    }
+
+    &__info {
+      &-container {
+        width: 50%;
+      }
+    }
+
+    &__post {
+      padding: 5px;
+
+      .wider {
+        width: 30px;
+      }
+    }
+
+    &__name {
+      font-size: 1.2rem !important;
+    }
+
+    &__update-photo label {
+      font-size: 5px;
+      padding: 0;
+    }
+
+    &__post {
+      img {
+        width: 25px;
+        height: 25px;
+        border: 1px solid #788fdc;
+      }
+    }
+
+    &__contacts {
+      svg.contact__icon {
+        width: 7px;
+        height: 7px;
+      }
+    }
+
+    &__button {
+      padding: 0 !important;
+      font-size: 8px;
+      width: 40px;
+    }
+
+    #button {
+      width: 20px;
+      height: 10px;
+
+      .knobs {
+        &::before {
+          top: 1px;
+          left: 1px;
+          width: 5px;
+          height: 3px;
+          font-size: 4px;
+        }
+      }
+    }
+
+    #button .checkbox:checked+.knobs:before {
+      left: 7px;
+    }
+  }
+
+  .textfield-container {
+    .MuiInputBase-multiline {
+      padding: 0;
+    }
+  }
+
+  .contact {
+    &__title {
+      font-size: .7rem;
+    }
+
+    &__item {
+      height: 25px;
+
+      span {
+        font-size: .5rem;
+      }
+
+      svg {
+        width: 8px;
+        height: 8px;
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@import '../../constants/styles.scss';
+
+.login {
+  &__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__content {
+    width: 20rem;
+    height: 25rem;
+    border: 2px solid $purple;
+    background-color: #191621;
+    padding: 5px;
+    border-radius: 10px;
+  }
+
+  &__title {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  &__rememberMe {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-right: 1rem;
+    }
+  }
+
+  &__input-container {
+    width: 100%;
+    margin-bottom: 1rem;
+
+  }
+}

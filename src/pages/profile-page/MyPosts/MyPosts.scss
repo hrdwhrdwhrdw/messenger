@@ -1,0 +1,28 @@
+@import '../../../constants/styles.scss';
+
+.profile {
+  &__post {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  &__postlist {
+    margin-top: 10px;
+  }
+}
+
+.posts {
+  &__textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0.2rem;
+    border-bottom: 3px solid $purple;
+    border-radius: 5px;
+    background-color: rgb(231, 231, 231);
+  }
+  &__button {
+    button {
+      font-size: 0.6rem;
+    }
+  }
+}
+
