@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
   followUser,
   unfollowUser,
-  getUsers,
+  requestUsers,
   getUsersAfterChange,
 } from "../../redux/thunks/usersThunks";
 import {
@@ -13,10 +13,19 @@ import {
 } from "../../redux/actions/usersActions";
 import Users from "./Users";
 import Preloader from "../../components/Preloader/Preloader";
+import {
+  getUsers,
+  getCurrentPage,
+  getFollowingInProgress,
+  getIsFetching,
+  getPageSize,
+  getPortionSize,
+  getTotalUsersCount,
+} from "../../redux/selectors/users-selectors";
 
 class UsersContainer extends Component {
   componentDidMount() {
-    this.props.getUsers(this.props.pageSize, this.props.currentPage);
+    this.props.requestUsers(this.props.pageSize, this.props.currentPage);
   }
 
   onPageChange = (page) => {
@@ -48,13 +57,13 @@ class UsersContainer extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    portionSize: state.usersPage.portionSize,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress,
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    portionSize: getPortionSize(state),
+    isFetching: getIsFetching(state),
+    followingInProgress: getFollowingInProgress(state),
   };
 };
 
@@ -63,7 +72,7 @@ export default connect(mapStateToProps, {
   unfollowUser,
   setUsers,
   setCurrentPage,
-  getUsers,
+  requestUsers,
   getUsersAfterChange,
   isFetchingToggle,
 })(UsersContainer);

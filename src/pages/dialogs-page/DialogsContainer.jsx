@@ -4,10 +4,11 @@ import withAuthRedirect from "../../HOC/withAuthRedirect";
 import { compose } from "redux";
 import { reset } from "redux-form";
 import { addMessage } from "../../redux/actions/dialogsActions";
+import { getDialogsPage } from "../../redux/selectors/dialogs-selectors";
 
 let mapStateToProps = (state) => {
   return {
-    dialogsPage: state.dialogsPage,
+    dialogsPage: getDialogsPage(state),
   };
 };
 

@@ -6,10 +6,11 @@ import {
 } from "../../../redux/actions/profileActions";
 import { connect } from "react-redux";
 import { reset } from "redux-form";
+import { getPosts } from "../../../redux/selectors/profile-selectors";
 
 let mapStateToProps = (state) => {
   return {
-    posts: state.profilePage.posts,
+    posts: getPosts(state),
   };
 };
 let mapDispatchToProps = (dispatch) => {

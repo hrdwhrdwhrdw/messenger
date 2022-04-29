@@ -9,7 +9,7 @@ import {
   unfollow,
 } from "../actions/usersActions";
 
-export const getUsers = (pageSize, currentPage) => async (dispatch) => {
+export const requestUsers = (pageSize, currentPage) => async (dispatch) => {
   dispatch(isFetchingToggle(true));
   let data = await UsersAPI.getUsers(pageSize, currentPage);
   dispatch(isFetchingToggle(false));
