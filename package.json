@@ -16,6 +16,7 @@
     "@types/react": "^17.0.44",
     "@types/react-dom": "^18.0.3",
     "axios": "^0.26.0",
+    "babel-eslint": "^10.1.0",
     "material-ui": "^0.20.2",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
@@ -39,7 +40,11 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:import/typescript",
+      "airbnb",
+      "prettier",
+      "prettier/react"
     ]
   },
   "browserslist": {
@@ -53,5 +58,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.10"
   }
 }

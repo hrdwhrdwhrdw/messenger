@@ -2,11 +2,23 @@ import { setAuthData, setCaptchaURL } from "../actions/authActions";
 import { stopSubmit } from "redux-form";
 import { AuthAPI } from "../../API/API";
 
-export const getAuthData = () => async (dispatch) => {
+export const getAuthData = () => async (dispatch: any) => {
   let response = await AuthAPI.getOwnData();
   if (response.resultCode === 0) {
-    let { id, login, email } = { ...response.data };
-    dispatch(setAuthData(id, login, email, true));
+    type DataType = {
+      id: any,
+      login: any,
+      email: any,
+    };
+
+    let data: DataType = {
+      id: response.data.id,
+      login: response.data.login,
+      email: response.data.email,
+    };
+    // let { id, login, email } = { ...response.data };
+    dispatch(setAuthData(data.id, data.login, data.email, true));
+    // dispatch(setAuthData(id, login, email, true));
   }
 };
 

@@ -55,7 +55,7 @@
 
   &__switch {
     display: flex;
-    border: 2px solid COLOR;
+    border: 2px solid $purple;
     border-radius: 8px;
     margin: 10px 0;
     width: 100%;
@@ -67,7 +67,7 @@
       border-radius: 5px !important;
 
       :hover {
-        background-color: COLOR !important;
+        background-color: $purple !important;
       }
     }
   }

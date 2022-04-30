@@ -1,6 +1,14 @@
 import { SET_AUTH_DATA, SET_CAPTCHA_URL } from "../../constants/constants";
 
-let initialState = {
+type InitialStateType = {
+  userId: number | null,
+  login: string | null,
+  email: string | null,
+  isAuth: boolean,
+  captcha: string | null,
+};
+
+let initialState: InitialStateType = {
   userId: null,
   login: null,
   email: null,
@@ -8,7 +16,7 @@ let initialState = {
   captcha: null,
 };
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case SET_AUTH_DATA: {
       return {

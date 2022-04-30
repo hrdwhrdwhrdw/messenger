@@ -1,10 +1,17 @@
 import { SET_INITIALIZING_SUCCESS } from "../../constants/constants";
 
-let initialState = {
+type InitialStateType = {
+  initialized: boolean;
+};
+
+let initialState: InitialStateType = {
   initialized: false,
 };
 
-export const appReducer = (state = initialState, action) => {
+export const appReducer = (
+  state = initialState,
+  action
+): InitialStateType => {
   switch (action.type) {
     case SET_INITIALIZING_SUCCESS: {
       return {
@@ -12,7 +19,7 @@ export const appReducer = (state = initialState, action) => {
         initialized: true,
       };
     }
-
+    
     default:
       return state;
   }
