@@ -1,4 +1,5 @@
-import { addMessage, dialogsReducer } from "./dialogs-reducer";
+import { dialogsReducer } from "../reducers/dialogsReducer";
+import { addMessage } from "../actions/dialogsActions";
 
 test("dialogs length should be 6", () => {
   let state = {

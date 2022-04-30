@@ -1,4 +1,5 @@
-import { addPostActionCreator, profileReducer } from "./profile-reducer";
+import {  profileReducer } from "./../reducers/profileReducer";
+import {addPostActionCreator} from '../actions/profileActions';
 
 test("post length should be 5", () => {
   let state = {

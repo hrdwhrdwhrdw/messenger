@@ -52,7 +52,8 @@ export default function ProfileStatus(props) {
             {...props}
           />
         ) : (
-          <div
+          <span
+          className="profile__status-text"
             onChange={onStatusChange}
             onClick={activateEditMode}
             style={{
@@ -63,7 +64,7 @@ export default function ProfileStatus(props) {
             }}
           >
             {props.status || "set status"}
-          </div>
+          </span>
         )
       ) : (
         <span>{props.status || "User has no status"}</span>
