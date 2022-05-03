@@ -7,14 +7,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import AddMessageReduxForm from "../../components/Forms/add-message-form/AddMessageForm";
 import { PURPLE } from "../../constants/styles";
 
-export const Dialogs = (props) => {
-  const buttonStyle = {
-    fontSize: "12px",
-    textTransform: "capitalize",
-    "&:hover": {
-      backgroundColor: PURPLE,
-    },
-  };
+export const Dialogs = (props: any) => {
+  // const buttonStyle = {
+  //   fontSize: "12px",
+  //   textTransform: "capitalize",
+  //   "&:hover": {
+  //     backgroundColor: PURPLE,
+  //   },
+  // };
 
   const inputStyle = {
     marginBottom: "10px",
@@ -50,13 +50,40 @@ export const Dialogs = (props) => {
             aria-label="outlined primary button group"
             className="switch__group-button"
           >
-            <Button className="switch__button" sx={buttonStyle}>
+            <Button
+              className="switch__button"
+              sx={{
+                fontSize: "12px",
+                textTransform: "capitalize",
+                "&:hover": {
+                  backgroundColor: PURPLE,
+                },
+              }}
+            >
               General
             </Button>
-            <Button className="switch__button" sx={buttonStyle}>
+            <Button
+              className="switch__button"
+              sx={{
+                fontSize: "12px",
+                textTransform: "capitalize",
+                "&:hover": {
+                  backgroundColor: PURPLE,
+                },
+              }}
+            >
               Groups
             </Button>
-            <Button className="switch__button" sx={buttonStyle}>
+            <Button
+              className="switch__button"
+              sx={{
+                fontSize: "12px",
+                textTransform: "capitalize",
+                "&:hover": {
+                  backgroundColor: PURPLE,
+                },
+              }}
+            >
               Personal
             </Button>
           </ButtonGroup>
