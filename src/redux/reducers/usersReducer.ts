@@ -1,13 +1,6 @@
-import {
-  FollowActionType,
-  FollowingInProgressToggleActionType,
-  IsFetchingToggleActionType,
-  SetCurrentPageActionType,
-  SetTotalUsersActionType,
-  SetUsersActionType,
-  UnfollowActionType,
-} from "redux/actions/usersActions";
+import { actions } from "redux/actions/usersActions";
 import { UserType } from "types/user-types";
+import { InferActionsType } from "../store/store";
 import {
   FOLLOW,
   UNFOLLOW,
@@ -30,14 +23,7 @@ let initialState = {
 
 type InitialStateType = typeof initialState;
 
-export type ActionTypes =
-  | FollowActionType
-  | UnfollowActionType
-  | SetUsersActionType
-  | SetTotalUsersActionType
-  | SetCurrentPageActionType
-  | IsFetchingToggleActionType
-  | FollowingInProgressToggleActionType;
+export type ActionTypes = InferActionsType<typeof actions>;
 
 export const usersReducer = (
   state = initialState,

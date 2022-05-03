@@ -1,3 +1,5 @@
+import { actions } from "redux/actions/profileActions";
+import { InferActionsType } from "redux/store/store";
 import { ProfileType, PostType } from "types/profile-types";
 import {
   ADD_NEW_POST,
@@ -22,6 +24,7 @@ let initialState = {
 };
 
 type InitialStateType = typeof initialState;
+export type ActionTypes = InferActionsType<typeof actions>
 
 export const profileReducer = (
   state = initialState,

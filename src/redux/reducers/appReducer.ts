@@ -1,16 +1,20 @@
+import { actions } from "redux/actions/appActions";
+import { InferActionsType } from '../store/store';
 import { SET_INITIALIZING_SUCCESS } from "../../constants/constants";
 
-type InitialStateType = {
-  initialized: boolean;
-};
 
-let initialState: InitialStateType = {
+let initialState = {
   initialized: false,
 };
 
+export type InitialStateType = typeof initialState;
+
+export type ActionTypes = InferActionsType<typeof actions>
+
+
 export const appReducer = (
   state = initialState,
-  action
+  action: ActionTypes
 ): InitialStateType => {
   switch (action.type) {
     case SET_INITIALIZING_SUCCESS: {

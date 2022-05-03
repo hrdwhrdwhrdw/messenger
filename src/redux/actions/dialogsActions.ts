@@ -1,11 +1,8 @@
 import { ADD_NEW_MESSAGE } from "../../constants/constants";
 
-type AddMessageActionType = {
-  type: typeof ADD_NEW_MESSAGE,
-  messageText: string
+export const actions = {
+  addMessage: (messageText: string) => ({
+    type: ADD_NEW_MESSAGE,
+    messageText,
+  })
 }
-
-export const addMessage = (messageText: string): AddMessageActionType => ({
-  type: ADD_NEW_MESSAGE,
-  messageText,
-});

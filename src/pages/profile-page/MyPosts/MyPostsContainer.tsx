@@ -1,9 +1,5 @@
 import MyPosts from "./MyPosts";
-import {
-  addPostActionCreator,
-  increaseLikesCount,
-  decreaseLikesCount,
-} from "../../../redux/actions/profileActions";
+import { actions } from "../../../redux/actions/profileActions";
 import { connect } from "react-redux";
 import { reset } from "redux-form";
 import { getPosts } from "../../../redux/selectors/profile-selectors";
@@ -16,16 +12,16 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
   return {
     addPost: (postText) => {
-      dispatch(addPostActionCreator(postText));
+      dispatch(actions.addPostActionCreator(postText));
     },
     resetForm: () => {
       dispatch(reset("addPost"));
     },
     increaseLikesCount: (id) => {
-      dispatch(increaseLikesCount(id));
+      dispatch(actions.increaseLikesCount(id));
     },
     decreaseLikesCount: (id) => {
-      dispatch(decreaseLikesCount(id));
+      dispatch(actions.decreaseLikesCount(id));
     },
   };
 };

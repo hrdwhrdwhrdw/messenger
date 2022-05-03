@@ -6,9 +6,7 @@ import {
   requestUsers,
 } from "../../redux/thunks/usersThunks";
 import {
-  setUsers,
-  setCurrentPage,
-  isFetchingToggle,
+  actions
 } from "../../redux/actions/usersActions";
 import Users from "./Users";
 import Preloader from "../../components/Preloader/Preloader";
@@ -94,9 +92,9 @@ export default connect<MapStatePropsType, MapDispatchPropsType>(
   {
     followUser,
     unfollowUser,
-    setUsers,
-    setCurrentPage,
+    setUsers: actions.setUsers,
+    setCurrentPage: actions.setCurrentPage,
     requestUsers,
-    isFetchingToggle,
+    isFetchingToggle: actions.isFetchingToggle,
   }
 )(UsersContainer);

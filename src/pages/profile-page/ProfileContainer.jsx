@@ -12,7 +12,6 @@ import withAuthRedirect from "../../HOC/withAuthRedirect";
 import { compose } from "redux";
 import { withRouter } from "../../hooks/withRouter";
 import { getProfile, getStatus, getAuthUserId, getIsAuth } from "../../redux/selectors/profile-selectors";
-import { RootState } from "redux/store/store";
 
 class ProfileContainer extends Component {
   refreshProfile() {

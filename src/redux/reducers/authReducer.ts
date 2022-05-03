@@ -1,31 +1,23 @@
 import { SET_AUTH_DATA, SET_CAPTCHA_URL } from "../../constants/constants";
-import {
-  SetAuthDataActionType,
-  SetCaptchaActionType,
-} from "../actions/authActions";
+import { InferActionsType } from "../store/store";
+import { actions } from "../actions/authActions";
 
 let initialState = {
-  userId: null,
-  login: null,
-  email: null,
-  isAuth: false,
-  captcha: null,
+  userId: null as number,
+  login: null as string,
+  email: null as string,
+  isAuth: false as boolean,
+  captcha: null as string,
 };
 
-type InitialStateActionType = {
-  userId: number;
-  login: string;
-  email: string;
-  isAuth: boolean;
-  captcha?: string;
-};
+type InitialStateActionType = typeof initialState;
 
-type ActionTypes = SetAuthDataActionType | SetCaptchaActionType
+export type ActionTypes = InferActionsType<typeof actions>;
 
 export const authReducer = (
   state = initialState,
   action: ActionTypes
-): InitialStateActionType  => {
+): InitialStateActionType => {
   switch (action.type) {
     case SET_AUTH_DATA: {
       return {

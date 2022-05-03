@@ -1,5 +1,5 @@
 import {  profileReducer } from "./../reducers/profileReducer";
-import {addPostActionCreator} from '../actions/profileActions';
+import {actions} from '../actions/profileActions';
 
 test("post length should be 5", () => {
   let state = {
@@ -11,7 +11,7 @@ test("post length should be 5", () => {
       { id: 5, message: "hello" },
     ],
   };
-  let action = addPostActionCreator("hello");
+  let action = actions.addPostActionCreator("hello");
 
   let newState = profileReducer(state, action)
 
@@ -30,7 +30,7 @@ test("post message should be correct", () => {
       { id: 5, message: "hello" },
     ],
   };
-  let action = addPostActionCreator("hello");
+  let action = actions.addPostActionCreator("hello");
 
   let newState = profileReducer(state, action)
 

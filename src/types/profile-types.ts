@@ -21,6 +21,10 @@ export type PhotoType = {
   large: string;
 };
 
+export type ResponsePhotoDataType = {
+  photos: PhotoType
+}
+
 export type ProfileType = {
   userId: number;
   lookingForAJob: string;

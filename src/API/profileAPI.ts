@@ -1,43 +1,32 @@
-import { PhotoType, ProfileType } from "types/profile-types";
+import { PhotoType, ProfileType, ResponsePhotoDataType } from "types/profile-types";
 import { DefaultResponseType } from "types/response-type";
 import {instance} from "./instance"
-import { ResponseCodes } from "./ResponseCodesEnum";
-
-type ResponseRequestStatusType = {
-  data: {
-    status: string
-  }
-}
-
-type ResponseSavePhotoType = {
-  data: PhotoType
-  resultCode: ResponseCodes;
-  messages: Array<string>;
-}
 
 export const ProfileAPI = {
-  getUserData(userId: number) {
-    return instance.get<ProfileType>(`profile/${userId}`).then((response) => response.data);
+  async getUserData(userId: number) {
+    const res = await instance.get<ProfileType>(`profile/${userId}`);
+    return res.data;
   },
 
-  requestStatus(userId: number) {
-    return instance
-      .get<ResponseRequestStatusType>(`profile/status/${userId}`)
-      .then((response) => response.data);
+  async requestStatus(userId: number) {
+    const res = await instance
+      .get<string>(`profile/status/${userId}`);
+    return res;
   },
 
   updateStatus(status: string) {
     return instance.put<DefaultResponseType>(`profile/status`, { status });
   },
 
-  savePhoto(photo: File) {
+  async savePhoto(photo: any) {
     const formData = new FormData();
     formData.append("image", photo);
-    return instance.put<ResponseSavePhotoType>(`profile/photo`, formData, {
+    const res = await instance.put<DefaultResponseType<ResponsePhotoDataType>>(`profile/photo`, formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
-      },
+        "Content-Type": "multipart/form-data"
+      }
     });
+    return res.data;
   },
 
   saveProfileInfo(profile: ProfileType) {

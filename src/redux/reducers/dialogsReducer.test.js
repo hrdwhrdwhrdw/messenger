@@ -1,5 +1,5 @@
 import { dialogsReducer } from "../reducers/dialogsReducer";
-import { addMessage } from "../actions/dialogsActions";
+import { actions } from "../actions/dialogsActions";
 
 test("dialogs length should be 6", () => {
   let state = {
@@ -11,7 +11,7 @@ test("dialogs length should be 6", () => {
       { id: 5, message: "good" },
     ]
   };
-  let action = addMessage("hello");
+  let action = actions.addMessage("hello");
 
   let newState = dialogsReducer(state, action)
 
@@ -30,7 +30,7 @@ test("post message should be correct", () => {
       { id: 5, message: "good" },
     ]
   };
-  let action = addMessage("hello");
+  let action = actions.addMessage("hello");
 
   let newState = dialogsReducer(state, action);
 
