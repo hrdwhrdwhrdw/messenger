@@ -1,7 +1,13 @@
+import React from "react";
 import TextField from "@mui/material/TextField";
 import styles from "./Textarea.module.scss";
+import { WrappedFieldProps } from "redux-form/lib/Field";
 
-export const MultiTextarea = ({ input, meta, ...props }) => {
+export const MultiTextarea: React.FC<WrappedFieldProps> = ({
+  input,
+  meta,
+  ...props
+}) => {
   const hasError = meta.touched && meta.error;
   const style = {
     "& .MuiInputBase-root": {
@@ -19,7 +25,7 @@ export const MultiTextarea = ({ input, meta, ...props }) => {
         display: "none",
       },
     },
-  }
+  };
   return (
     <div className={hasError ? styles.error : "textfield-container"}>
       <TextField

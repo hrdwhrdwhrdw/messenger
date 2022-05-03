@@ -1,4 +1,14 @@
 import {
+  FollowActionType,
+  FollowingInProgressToggleActionType,
+  IsFetchingToggleActionType,
+  SetCurrentPageActionType,
+  SetTotalUsersActionType,
+  SetUsersActionType,
+  UnfollowActionType,
+} from "redux/actions/usersActions";
+import { UserType } from "types/user-types";
+import {
   FOLLOW,
   UNFOLLOW,
   SET_USERS,
@@ -9,16 +19,30 @@ import {
 } from "../../constants/constants";
 
 let initialState = {
-  users: [],
+  users: [] as Array<UserType>,
   pageSize: 10,
   currentPage: 1,
   totalUsersCount: 0,
   portionSize: 10,
   isFetching: false,
-  followingInProgress: [],
+  followingInProgress: [] as Array<number>, // array of users id
 };
 
-export const usersReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState;
+
+export type ActionTypes =
+  | FollowActionType
+  | UnfollowActionType
+  | SetUsersActionType
+  | SetTotalUsersActionType
+  | SetCurrentPageActionType
+  | IsFetchingToggleActionType
+  | FollowingInProgressToggleActionType;
+
+export const usersReducer = (
+  state = initialState,
+  action: ActionTypes
+): InitialStateType => {
   switch (action.type) {
     case FOLLOW: {
       return {

@@ -5,14 +5,30 @@ import { Link } from "react-router-dom";
 import Pagination from "../../helpers/pagination/Pagination";
 import { Button } from "@material-ui/core";
 import { PURPLE, WHITE } from "../../constants/styles";
+import { UserType } from "types/user-types";
 
-const Users = ({
-  totalUsersCount,
+type Props = {
+  totalUsersCount: number;
+  pageSize: number;
+  currentPage: number;
+  onPageChange: (pageNumber: number) => void;
+  portionSize: number;
+  users: Array<UserType>;
+  followingInProgress: Array<number>,
+  follow: (id: number) => void,
+  unfollow: (id: number) => void,
+};
+
+const Users: React.FC<Props> = ({
+  totalUsersCount,  
   pageSize,
   currentPage,
   onPageChange,
   portionSize,
-  ...props
+  users,
+  followingInProgress,
+  follow,
+  unfollow
 }) => {
   const style = {
     fontSize: "12px",
@@ -28,7 +44,7 @@ const Users = ({
   };
   return (
     <div className="user__list">
-      {props.users.map((user) => {
+      {users.map((user) => {
         return (
           <div key={user.id} className="user__item">
             <div>
@@ -49,26 +65,26 @@ const Users = ({
               </div>
               {user.followed ? (
                 <Button
-                  disabled={props.followingInProgress.some(
+                  disabled={followingInProgress.some(
                     (id) => id === user.id
                   )}
                   onClick={() => {
-                    props.unfollow(user.id);
+                    unfollow(user.id);
                   }}
-                  sx={style}
+                  sx={style as any}
                   className="user__button"
                 >
                   Unfollow
                 </Button>
               ) : (
                 <Button
-                  disabled={props.followingInProgress.some(
+                  disabled={followingInProgress.some(
                     (id) => id === user.id
                   )}
                   onClick={() => {
-                    props.follow(user.id);
+                    follow(user.id);
                   }}
-                  sx={style}
+                  sx={style as any}
                   className="user__button"
                 >
                   Follow

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "jsx": "react",
+    "esModuleInterop": true
+  },
+  "target": "es2015",
+  "noImplicitAny": true,
+  "noEmitOnError": true,
+  "strict": true,
+  "strictNullChecks": true,
+  "strictPropertyInitialization": true,
+}

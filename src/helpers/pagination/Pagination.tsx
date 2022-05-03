@@ -4,7 +4,15 @@ import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
 import styles from "./Pagination.module.scss";
 
-const Pagination = ({
+type Props = {
+  totalItemsCount: number;
+  pageSize: number;
+  currentPage: number;
+  onPageChange: (PageNumber: number) => void;
+  portionSize: number;
+};
+
+const Pagination: React.FC<Props> = ({
   totalItemsCount,
   pageSize,
   currentPage,
@@ -16,13 +24,13 @@ const Pagination = ({
     [currentPage, portionSize]
   );
 
-  let pages = [];
+  let pages: Array<number> = [];
   let pagesCount = Math.ceil(totalItemsCount / pageSize);
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
   let portionCount = Math.ceil(pagesCount / portionSize);
-  let [portionNumber, setPortionNumber] = useState(1);
+  let [portionNumber, setPortionNumber] = useState<number>(1);
   let leftPageNumberPortion = (portionNumber - 1) * portionSize + 1;
   let rightPageNumberPortion = portionNumber * portionSize;
 

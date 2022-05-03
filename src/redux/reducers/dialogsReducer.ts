@@ -1,5 +1,15 @@
 import { ADD_NEW_MESSAGE } from "../../constants/constants";
 
+type DialogType = {
+  id: number,
+  name:string
+}
+
+type MessageType = {
+  id: number,
+  message:string
+}
+
 let initialState = {
   dialogsUsers: [
     { id: 1, name: "Dima" },
@@ -27,17 +37,19 @@ let initialState = {
     { id: 23, name: "Anatoliy" },
     { id: 24, name: "Sergey" },
     { id: 25, name: "Nikita" },
-  ],
+  ] as Array<DialogType>,
   dialogsMessage: [
     { id: 1, message: "hello" },
     { id: 2, message: "hi" },
     { id: 3, message: "bye" },
     { id: 4, message: "ciao" },
     { id: 5, message: "good" },
-  ],
+  ] as Array<MessageType>,
 };
 
-export const dialogsReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState
+
+export const dialogsReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case ADD_NEW_MESSAGE: {
       let newMessage = {

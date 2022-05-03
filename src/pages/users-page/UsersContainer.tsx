@@ -4,7 +4,6 @@ import {
   followUser,
   unfollowUser,
   requestUsers,
-  getUsersAfterChange,
 } from "../../redux/thunks/usersThunks";
 import {
   setUsers,
@@ -22,14 +21,37 @@ import {
   getPortionSize,
   getTotalUsersCount,
 } from "../../redux/selectors/users-selectors";
+import { UserType } from "types/user-types";
+import { RootState } from "redux/store/store";
 
-class UsersContainer extends Component {
+type MapStatePropsType = {
+  pageSize: number;
+  currentPage: number;
+  isFetching: boolean;
+  totalUsersCount: number;
+  portionSize: number;
+  users: Array<UserType>;
+  followingInProgress: Array<number>;
+};
+
+type MapDispatchPropsType = {
+  requestUsers: (pageSize: number, currentPage: number) => void;
+  followUser: (userId: number) => void;
+  unfollowUser: (userId: number) => void;
+  setUsers: (users: Array<UserType>) => void;
+  setCurrentPage: (page: number) => void;
+  isFetchingToggle: (isFetching: boolean) => void;
+};
+
+type PropsType = MapStatePropsType & MapDispatchPropsType;
+
+class UsersContainer extends Component<PropsType> {
   componentDidMount() {
     this.props.requestUsers(this.props.pageSize, this.props.currentPage);
   }
 
-  onPageChange = (page) => {
-    this.props.getUsersAfterChange(this.props.pageSize, page);
+  onPageChange = (page: number) => {
+    this.props.requestUsers(this.props.pageSize, page);
   };
 
   render() {
@@ -55,7 +77,7 @@ class UsersContainer extends Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: RootState) => {
   return {
     users: getUsers(state),
     pageSize: getPageSize(state),
@@ -67,12 +89,14 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  followUser,
-  unfollowUser,
-  setUsers,
-  setCurrentPage,
-  requestUsers,
-  getUsersAfterChange,
-  isFetchingToggle,
-})(UsersContainer);
+export default connect<MapStatePropsType, MapDispatchPropsType>(
+  mapStateToProps,
+  {
+    followUser,
+    unfollowUser,
+    setUsers,
+    setCurrentPage,
+    requestUsers,
+    isFetchingToggle,
+  }
+)(UsersContainer);

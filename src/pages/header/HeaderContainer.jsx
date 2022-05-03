@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import { connect } from "react-redux";
-import { logout } from "../../redux/thunks/authThunks.ts";
+import { logout } from "../../redux/thunks/authThunks";
 import "./Header.scss";
 import { getEmail, getLogin, getUserId } from "../../redux/selectors/header-selectors";
 import { getIsAuth } from "../../redux/selectors/login-selectors";

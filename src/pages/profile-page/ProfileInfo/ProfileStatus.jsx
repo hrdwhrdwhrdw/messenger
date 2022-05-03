@@ -1,8 +1,8 @@
-import { Input } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Input } from "@mui/material";
 import {BURGUNDY, PURPLE} from '../../../constants/styles';
 
-export default function ProfileStatus(props) {
+export default function ProfileStatus({updateStatus,isOwner, ...props}) {
   let [editMode, setEditMode] = useState(false);
   let [status, setStatus] = useState(props.status);
 
@@ -20,12 +20,12 @@ export default function ProfileStatus(props) {
 
   const deactivateEditMode = () => {
     setEditMode(false);
-    props.updateStatus(status);
+    updateStatus(status);
   };
 
   return (
     <div className="profile__status-inner">
-      {props.isOwner ? (
+      {isOwner ? (
         editMode ? (
           <Input
             sx={{
@@ -52,7 +52,7 @@ export default function ProfileStatus(props) {
             {...props}
           />
         ) : (
-          <span
+          <div
           className="profile__status-text"
             onChange={onStatusChange}
             onClick={activateEditMode}
@@ -64,7 +64,7 @@ export default function ProfileStatus(props) {
             }}
           >
             {props.status || "set status"}
-          </span>
+          </div>
         )
       ) : (
         <span>{props.status || "User has no status"}</span>

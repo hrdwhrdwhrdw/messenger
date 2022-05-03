@@ -3,7 +3,7 @@ import { reduxForm } from "redux-form";
 import { Field } from "redux-form";
 import { Form } from "redux-form";
 import CustomButton from "../../Button/Button";
-import Checkbox from "../../Checkbox/Checkbox";
+import Checkbox from "../../Controls/Checkbox/Checkbox";
 import renderIcons from "../../../helpers/renderIcons";
 import { CustomInput } from "../../Controls/Input/Input";
 import "./ProfileDataForm.scss";

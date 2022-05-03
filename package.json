@@ -15,6 +15,8 @@
     "@types/node": "^17.0.30",
     "@types/react": "^17.0.44",
     "@types/react-dom": "^18.0.3",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/redux-form": "^8.3.5",
     "axios": "^0.26.0",
     "babel-eslint": "^10.1.0",
     "material-ui": "^0.20.2",
@@ -37,16 +39,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "plugin:import/typescript",
-      "airbnb",
-      "prettier",
-      "prettier/react"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -60,6 +52,10 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.17.10"
+    "@babel/core": "^7.17.10",
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
+    "eslint": "^8.14.0",
+    "eslint-plugin-react": "^7.29.4"
   }
 }

@@ -1,3 +1,4 @@
+import { ProfileType, PostType } from "types/profile-types";
 import {
   ADD_NEW_POST,
   INCREASE_LIKES_POST,
@@ -15,17 +16,24 @@ let initialState = {
     { id: 3, message: "my post", likesCount: 3, isLiked: false },
     { id: 4, message: "again my post", likesCount: 4, isLiked: false },
     { id: 5, message: "hello all", likesCount: 0, isLiked: false },
-  ],
-  profile: null,
+  ] as Array<PostType>,
+  profile: null as ProfileType | null,
   status: "",
 };
 
-export const profileReducer = (state = initialState, action) => {
+type InitialStateType = typeof initialState;
+
+export const profileReducer = (
+  state = initialState,
+  action: any
+): InitialStateType => {
   switch (action.type) {
     case ADD_NEW_POST: {
       let newPost = {
         id: state.posts.length + 1,
         message: action.postText,
+        likesCount: 0,
+        isLiked: false,
       };
       return {
         ...state,
