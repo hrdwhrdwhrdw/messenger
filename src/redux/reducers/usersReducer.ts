@@ -21,7 +21,7 @@ let initialState = {
   followingInProgress: [] as Array<number>, // array of users id
 };
 
-type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 
 export type ActionTypes = InferActionsType<typeof actions>;
 
@@ -35,8 +35,7 @@ export const usersReducer = (
         ...state,
         users: state.users.map((user) => {
           if (user.id === action.userId) {
-            user.followed = true;
-            return user;
+            return {...user, followed: true}
           }
           return user;
         }),
@@ -48,8 +47,7 @@ export const usersReducer = (
         ...state,
         users: state.users.map((user) => {
           if (user.id === action.userId) {
-            user.followed = false;
-            return user;
+            return {...user, followed: false}
           }
           return user;
         }),

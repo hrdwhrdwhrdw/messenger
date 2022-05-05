@@ -23,7 +23,7 @@ let initialState = {
   status: "",
 };
 
-type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 export type ActionTypes = InferActionsType<typeof actions>
 
 export const profileReducer = (
