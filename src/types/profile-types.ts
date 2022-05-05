@@ -28,7 +28,9 @@ export type ResponsePhotoDataType = {
 export type ProfileType = {
   userId: number;
   lookingForAJob: string;
+  aboutMe: string;
   lookingForAJobString: string;
+  lookingForAJobDescription: string;
   fullName: string;
   contacts: ContactType;
   photos: PhotoType;

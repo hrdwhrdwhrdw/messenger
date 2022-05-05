@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { DialogType } from '../../../redux/reducers/dialogsReducer';
 
-const DialogsUserItem = (props) => {
+const DialogsUserItem: React.FC<DialogType> = (props) => {
   return (
     <li className="dialogs__useritem">
       <NavLink to={props.id + ""} className="useritem__link">

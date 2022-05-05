@@ -6,21 +6,24 @@ import { Button, ButtonGroup, Input, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@mui/icons-material/Search";
 import AddMessageReduxForm from "../../components/Forms/add-message-form/AddMessageForm";
 import { PURPLE } from "../../constants/styles";
+import { InitialStateType } from '../../redux/reducers/dialogsReducer';
 
-export const Dialogs = (props: any) => {
-  // const buttonStyle = {
-  //   fontSize: "12px",
-  //   textTransform: "capitalize",
-  //   "&:hover": {
-  //     backgroundColor: PURPLE,
-  //   },
-  // };
+type PropsType = {
+  dialogsPage: InitialStateType,
+  sendMessage: (messageText: string) => void,
+  reset: (form: string) => void
+}
 
+export type NewMessageType = {
+  newMessageText: string
+}
+
+export const Dialogs: React.FC<PropsType> = (props) => {
   const inputStyle = {
     marginBottom: "10px",
     padding: "5px",
     fontSize: "12px",
-    width: "100%",
+    width: "100%", 
     color: "#61656e",
     fontWeight: "bold",
     backgroundColor: "#151922",
@@ -35,9 +38,9 @@ export const Dialogs = (props: any) => {
     },
   };
 
-  let addMessage = (values) => {
+  let addMessage = (values: NewMessageType) => {
     props.sendMessage(values.newMessageText);
-    props.reset();
+    props.reset("addMessage");
   };
 
   return (

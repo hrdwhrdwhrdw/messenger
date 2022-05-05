@@ -1,5 +1,6 @@
+import React from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import { ReactComponent as Vksvg } from "../assets/images/vk-brands.svg";
+import {ReactComponent as Vksvg}  from "../assets/images/vk-brands.svg";
 import WebIcon from "@mui/icons-material/Web";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -7,7 +8,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkIcon from "@mui/icons-material/Link";
 
-const renderIcons = (contactTitle) => {
+const renderIcons = (contactTitle: string) => {
   switch (contactTitle) {
     case "vk":
       return <Vksvg className="contact__icon contact__icon_vk" />;

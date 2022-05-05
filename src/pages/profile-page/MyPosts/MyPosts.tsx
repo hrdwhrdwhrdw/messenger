@@ -2,20 +2,33 @@ import React from "react";
 import Post from "./Post/Post";
 import "./MyPosts.scss";
 import AddPostForm from "../../../components/Forms/add-post-form/AddPostForm";
+import { PostType } from "../../../types/profile-types";
 
-export default function MyPosts(props) {
-  let addPost = (values) => {
+export type PropsType = {
+  posts: Array<PostType>;
+  addPost: (postText: string) => void;
+  reset: (form: string) => void;
+  increaseLikesCount: (id: number) => void;
+  decreaseLikesCount: (id: number) => void;
+};
+
+export type NewPostType = {
+  newPost: string;
+};
+
+const MyPosts: React.FC<PropsType> = (props) => {
+  let addPost = (values: NewPostType) => {
     if (values.newPost) {
       props.addPost(values.newPost);
-      props.resetForm();
+      props.reset("addPost");
     }
   };
 
-  let increaseLikesCount = (id) => {
+  let increaseLikesCount = (id: number) => {
     props.increaseLikesCount(id);
   };
 
-  let decreaseLikesCount = (id) => {
+  let decreaseLikesCount = (id: number) => {
     props.decreaseLikesCount(id);
   };
 
@@ -37,4 +50,6 @@ export default function MyPosts(props) {
       </ul>
     </div>
   );
-}
+};
+
+export default MyPosts;

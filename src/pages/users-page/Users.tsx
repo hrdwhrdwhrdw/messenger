@@ -1,11 +1,8 @@
 import React from "react";
 import "./Users.scss";
-import defaultUserPhoto from "./../../assets/images/i.webp";
-import { Link } from "react-router-dom";
 import Pagination from "../../helpers/pagination/Pagination";
-import { Button } from "@material-ui/core";
-import { PURPLE, WHITE } from "../../constants/styles";
 import { UserType } from "types/user-types";
+import User from "./User";
 
 type Props = {
   totalUsersCount: number;
@@ -14,13 +11,13 @@ type Props = {
   onPageChange: (pageNumber: number) => void;
   portionSize: number;
   users: Array<UserType>;
-  followingInProgress: Array<number>,
-  follow: (id: number) => void,
-  unfollow: (id: number) => void,
+  followingInProgress: Array<number>;
+  follow: (id: number) => void;
+  unfollow: (id: number) => void;
 };
 
 const Users: React.FC<Props> = ({
-  totalUsersCount,  
+  totalUsersCount,
   pageSize,
   currentPage,
   onPageChange,
@@ -28,72 +25,19 @@ const Users: React.FC<Props> = ({
   users,
   followingInProgress,
   follow,
-  unfollow
+  unfollow,
 }) => {
-  const style = {
-    fontSize: "12px",
-    width: "80px",
-    color: WHITE,
-    fontWeight: "bold",
-    border: "2px solid #8169ff",
-    borderRadius: "20px",
-    textTransform: "capitalize",
-    "&:hover": {
-      backgroundColor: PURPLE,
-    },
-  };
   return (
     <div className="user__list">
-      {users.map((user) => {
-        return (
-          <div key={user.id} className="user__item">
-            <div>
-              <Link to={"/profile/" + user.id}>
-                <img
-                  src={user.photos.small || defaultUserPhoto}
-                  alt=""
-                  className="user__image"
-                />
-              </Link>
-            </div>
-            <div className="user__info">
-              <div className="user__name">
-                <span>{user.name}</span>
-              </div>
-              <div className="user__status">
-                <span>{user.status}</span>
-              </div>
-              {user.followed ? (
-                <Button
-                  disabled={followingInProgress.some(
-                    (id) => id === user.id
-                  )}
-                  onClick={() => {
-                    unfollow(user.id);
-                  }}
-                  sx={style as any}
-                  className="user__button"
-                >
-                  Unfollow
-                </Button>
-              ) : (
-                <Button
-                  disabled={followingInProgress.some(
-                    (id) => id === user.id
-                  )}
-                  onClick={() => {
-                    follow(user.id);
-                  }}
-                  sx={style as any}
-                  className="user__button"
-                >
-                  Follow
-                </Button>
-              )}
-            </div>
-          </div>
-        );
-      })}
+      {users.map((user) => (
+        <User
+          user={user}
+          followingInProgress={followingInProgress}
+          follow={follow}
+          unfollow={unfollow}
+          key={user.id}
+        />
+      ))}
       <Pagination
         totalItemsCount={totalUsersCount}
         pageSize={pageSize}

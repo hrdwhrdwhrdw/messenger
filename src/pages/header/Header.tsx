@@ -5,7 +5,14 @@ import "./Header.scss";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-export default function Header(props) {
+type PropsType = {
+  isNavExpanded: boolean,
+  login: string,
+  isAuth: boolean,
+  logout: () => void;
+}
+
+const Header: React.FC<PropsType> = (props) => {
   const style = {
     display: "flex",
     justifyContent: "center",
@@ -41,3 +48,5 @@ export default function Header(props) {
     </header>
   );
 }
+
+export default Header;

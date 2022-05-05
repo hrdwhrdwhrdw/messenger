@@ -1,10 +1,16 @@
-import { IconButton } from "material-ui";
 import React from "react";
+import { IconButton } from "material-ui";
 import "./Post.scss";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { PostType } from "../../../../types/profile-types";
 
-export default function Post(props) {
+type PropsType = {
+  increaseLikesCount: (id: number) => void;
+  decreaseLikesCount: (id: number) => void;
+};
+
+const Post: React.FC<PostType & PropsType> = (props) => {
   return (
     <div className="profile__post">
       <img
@@ -47,4 +53,6 @@ export default function Post(props) {
       </div>
     </div>
   );
-}
+};
+
+export default Post;

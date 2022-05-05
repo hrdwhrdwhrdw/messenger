@@ -4,18 +4,27 @@ import defaultUserPhoto from "../../../assets/images/i.webp";
 import ProfileDataForm from "../../../components/Forms/profile-data-form/ProfileDataForm";
 import CustomButton from "../../../components/Button/Button";
 import { ProfileData } from "./ProfileData/ProfileData";
+import { ProfileType } from "../../../types/profile-types";
+import { PropsType } from "../Profile";
 
-export const ProfileInfo = (props) => {
+export type ProfileDataPropsType = {
+  isOwner: boolean,
+  profile: ProfileType
+}
+
+export const ProfileInfo: React.FC<PropsType & ProfileDataPropsType> = (props) => {
   const [editMode, setEditMode] = useState(false);
-  const onSubmit = (formData) => {
+  const onSubmit = (formData: ProfileType) => {
     props.setProfile(formData).then(() => setEditMode(false));
+    
   };
 
-  const savePhoto = (e) => {
-    if (e.target.files.length) {
-      props.updatePhoto(e.target.files[0]);
+  const savePhoto = (e:Event) => {
+    let file = e.target as HTMLInputElement;
+    if (file.files.length) {
+      props.updatePhoto(file.files[0]);
     }
-  };
+  };  
   return (
     <div className="profile__info">
       <div className="profile__photo">
@@ -34,7 +43,7 @@ export const ProfileInfo = (props) => {
                   id="raised-button-file"
                   multiple
                   type="file"
-                  onChange={savePhoto}
+                  onChange={(e) => savePhoto}
                   hidden
                 />
               </CustomButton>
@@ -56,6 +65,7 @@ export const ProfileInfo = (props) => {
             profile={props.profile}
             onSubmit={onSubmit}
             isOwner={props.isOwner}
+            {...props}
           />
         ) : (
           <ProfileData

@@ -4,9 +4,13 @@ import "./Navbar.scss";
 import HomeIcon from "@mui/icons-material/Home";
 import CommentIcon from "@mui/icons-material/Comment";
 import PeopleIcon from "@mui/icons-material/People";
-// import SettingsIcon from "@mui/icons-material/Settings";
 
-export default function Navbar(props) {
+type PropsType = {
+  isNavExpanded: boolean,
+  shrinkNav: () => void
+}
+
+const Navbar: React.FC<PropsType> = (props) => {
   const shrinkNav = (e) => {
     e.stopPropagation();
     props.shrinkNav();
@@ -46,3 +50,5 @@ export default function Navbar(props) {
     </nav>
   );
 }
+
+export default Navbar;

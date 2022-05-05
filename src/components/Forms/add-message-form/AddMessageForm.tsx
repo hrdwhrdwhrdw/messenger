@@ -1,12 +1,18 @@
+import React from "react";
 import { Button } from "@material-ui/core";
 import { Field } from "redux-form";
-import { reduxForm } from "redux-form";
+import { InjectedFormProps, reduxForm } from "redux-form";
 import SendIcon from "@mui/icons-material/Send";
 import { MultiTextarea } from "../../Controls/Textarea/Textarea";
 import { PURPLE } from "../../../constants/styles";
+import { NewMessageType } from "pages/dialogs-page/Dialogs";
 
+type PropsType = {}
 
-const AddMessageForm = (props) => {
+const AddMessageForm: React.FC<
+InjectedFormProps<NewMessageType, PropsType> &
+PropsType
+> = (props) => {
   const styles = {
     borderRadius: "50%",
     height: "32px",
@@ -41,7 +47,7 @@ const AddMessageForm = (props) => {
   );
 };
 
-const AddMessageReduxForm = reduxForm({
+const AddMessageReduxForm = reduxForm<NewMessageType & PropsType>({
   form: "addMessage",
 })(AddMessageForm);
 

@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "@mui/material";
-import {BURGUNDY, PURPLE} from '../../../constants/styles';
+import { BURGUNDY, PURPLE } from "../../../constants/styles";
 
-export default function ProfileStatus({updateStatus,isOwner, ...props}) {
-  let [editMode, setEditMode] = useState(false);
-  let [status, setStatus] = useState(props.status);
+type PropsType = {
+  status: string,
+  isOwner: boolean,
+  updateStatus:(status: string) => void
+}
+
+const ProfileStatus: React.FC<PropsType> = ({ updateStatus, isOwner, ...props }) => {
+  let [editMode, setEditMode] = useState<boolean>(false);
+  let [status, setStatus] = useState<string>(props.status);
 
   useEffect(() => {
     setStatus(props.status);
@@ -53,7 +59,7 @@ export default function ProfileStatus({updateStatus,isOwner, ...props}) {
           />
         ) : (
           <div
-          className="profile__status-text"
+            className="profile__status-text"
             onChange={onStatusChange}
             onClick={activateEditMode}
             style={{
@@ -72,3 +78,5 @@ export default function ProfileStatus({updateStatus,isOwner, ...props}) {
     </div>
   );
 }
+
+export default ProfileStatus;

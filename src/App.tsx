@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { useEffect, useState } from "react";
-
+import { useEffect, useState, useLayoutEffect } from "react";
 import "./App.scss";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./pages/navbar/Navbar";
@@ -17,6 +16,8 @@ import Preloader from "./components/Preloader/Preloader";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomButton from "./components/Button/Button";
+import { RootState } from './redux/store/store';
+import {getInitialized} from "./redux/selectors/app-selectors";
 
 const UsersContainer = lazy(() => import("./pages/users-page/UsersContainer"));
 const DialogsContainer = lazy(() =>
@@ -27,12 +28,27 @@ const ProfileContainer = lazy(() =>
 );
 const LoginContainer = lazy(() => import("./pages/login-page/LoginContainer"));
 
-const App = (props) => {
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
+type MapDispatchPropsType = {
+  setInitializing: () => void;
+}
+
+
+const App: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
   let [isNavExpanded, setIsNavExpanded] = useState(false);
+
+  const catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
+    alert("Some error occurred");
+  };
 
   useEffect(() => {
     props.setInitializing();
+    window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
   }, [props]);
+
+  useLayoutEffect(() => () => {
+    window.removeEventListener("unhandledrejection", catchAllUnhandledErrors);
+  }, [])
 
   const expandNav = () => {
     setIsNavExpanded(true);
@@ -86,15 +102,16 @@ const App = (props) => {
   );
 };
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: RootState) => {
   return {
-    initialized: state.app.initialized,
+    initialized: getInitialized(state),
   };
 };
 
-const AppContainer = connect(mapStateToProps, { setInitializing })(App);
 
-const MyApp = () => {
+const AppContainer = connect<MapStatePropsType, MapDispatchPropsType>(mapStateToProps, { setInitializing })(App);
+
+const MyApp: React.FC = () => {
   return (
     <React.StrictMode>
       <BrowserRouter>

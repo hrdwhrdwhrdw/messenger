@@ -1,13 +1,17 @@
-import CustomButton from "../../../components/Button/Button";
-import { reduxForm } from "redux-form";
+import React from "react";
+import CustomButton from "../../Button/Button";
+import { InjectedFormProps, reduxForm } from "redux-form";
 import { Field } from "redux-form";
 import { maxLength100 } from "../../../helpers/maxLength";
 import { MultiTextarea } from "../../Controls/Textarea/Textarea";
 import styles from "./AddPostForm.module.scss";
+import { NewPostType } from "../../../pages/profile-page/MyPosts/MyPosts";
 
-const AddPostForm = (props) => {
+const AddPostForm: React.FC<InjectedFormProps<NewPostType>> = ({
+  handleSubmit,
+}) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Field
         className="posts__textarea"
         name="newPost"
@@ -24,7 +28,7 @@ const AddPostForm = (props) => {
   );
 };
 
-const AddPostReduxForm = reduxForm({
+const AddPostReduxForm = reduxForm<NewPostType>({
   form: "addPost",
 })(AddPostForm);
 

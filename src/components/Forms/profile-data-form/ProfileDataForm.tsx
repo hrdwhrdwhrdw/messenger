@@ -1,5 +1,5 @@
 import React from "react";
-import { reduxForm } from "redux-form";
+import { reduxForm, InjectedFormProps } from "redux-form";
 import { Field } from "redux-form";
 import { Form } from "redux-form";
 import CustomButton from "../../Button/Button";
@@ -7,15 +7,18 @@ import Checkbox from "../../Controls/Checkbox/Checkbox";
 import renderIcons from "../../../helpers/renderIcons";
 import { CustomInput } from "../../Controls/Input/Input";
 import "./ProfileDataForm.scss";
+import { ProfileType } from '../../../types/profile-types';
+import { ProfileDataPropsType } from '../../../pages/profile-page/ProfileInfo/ProfileInfo';
 
-const ProfileDataForm = (props) => {
+const ProfileDataForm: React.FC<
+InjectedFormProps<ProfileType, ProfileDataPropsType> &
+ProfileDataPropsType
+> = ({handleSubmit, error, profile, isOwner}) => {
   return (
-    <Form onSubmit={props.handleSubmit}>
-      {props.error && (
+    <Form onSubmit={handleSubmit}>
+      {error && (
         <div className="summary">
-          {props.error.map((key) => (
-            <div>{key}</div>
-          ))}
+          <div>{error}</div>
         </div>
       )}
       <div className="profile__contact contact__item">
@@ -48,7 +51,7 @@ const ProfileDataForm = (props) => {
       </div>
       <div>
         <span className="contact__title">My contacts:</span>
-        {Object.keys(props.profile.contacts).map((key) => (
+        {Object.keys(profile.contacts).map((key) => (
           <div className="profile__contact contact__item">
             {renderIcons(key)}
             <span>{key}:</span>
@@ -61,7 +64,7 @@ const ProfileDataForm = (props) => {
           </div>
         ))}
         <div>
-          {props.isOwner && (
+          {isOwner && (
             <CustomButton type="submit" className="profile__button">
               Save
             </CustomButton>
