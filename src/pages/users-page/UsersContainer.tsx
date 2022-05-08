@@ -1,100 +1,40 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import {
-  followUser,
-  unfollowUser,
-  requestUsers,
-} from "../../redux/thunks/usersThunks";
-import {
-  actions
-} from "../../redux/actions/usersActions";
-import Users from "./Users";
-import Preloader from "../../components/Preloader/Preloader";
-import {
-  getUsers,
-  getCurrentPage,
-  getFollowingInProgress,
-  getIsFetching,
-  getPageSize,
-  getPortionSize,
-  getTotalUsersCount,
-} from "../../redux/selectors/users-selectors";
-import { UserType } from "types/user-types";
-import { RootState } from "redux/store/store";
+import React from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-type MapStatePropsType = {
-  pageSize: number;
-  currentPage: number;
-  isFetching: boolean;
-  totalUsersCount: number;
-  portionSize: number;
-  users: Array<UserType>;
-  followingInProgress: Array<number>;
-};
+import Preloader from '../../components/Preloader/Preloader';
+import { getCurrentPage, getIsFetching, getPageSize } from '../../redux/selectors/users-selectors';
+import { requestUsers } from '../../redux/thunks/usersThunks';
+import Users from './Users';
 
-type MapDispatchPropsType = {
-  requestUsers: (pageSize: number, currentPage: number) => void;
-  followUser: (userId: number) => void;
-  unfollowUser: (userId: number) => void;
-  setUsers: (users: Array<UserType>) => void;
-  setCurrentPage: (page: number) => void;
-  isFetchingToggle: (isFetching: boolean) => void;
-};
+const UsersContainer: React.FC = () => {
+  const dispatch = useDispatch();
+  const pageSize = useSelector(getPageSize);
+  const currentPage = useSelector(getCurrentPage);
 
-type PropsType = MapStatePropsType & MapDispatchPropsType;
+  useEffect(() => {
+    dispatch(requestUsers(pageSize, currentPage));
+  }, []);
 
-class UsersContainer extends Component<PropsType> {
-  componentDidMount() {
-    this.props.requestUsers(this.props.pageSize, this.props.currentPage);
-  }
-
-  onPageChange = (page: number) => {
-    this.props.requestUsers(this.props.pageSize, page);
+  const onPageChange = (page: number) => {
+    dispatch(requestUsers(pageSize, page));
   };
 
-  render() {
-    return (
-      <div className="user__container">
-        {this.props.isFetching ? (
-          <Preloader />
-        ) : (
-          <Users
-            totalUsersCount={this.props.totalUsersCount}
-            pageSize={this.props.pageSize}
-            onPageChange={this.onPageChange}
-            currentPage={this.props.currentPage}
-            portionSize={this.props.portionSize}
-            follow={this.props.followUser}
-            unfollow={this.props.unfollowUser}
-            users={this.props.users}
-            followingInProgress={this.props.followingInProgress}
-          />
-        )}
-      </div>
-    );
-  }
-}
+  const isFetching = useSelector(getIsFetching);
 
-let mapStateToProps = (state: RootState) => {
-  return {
-    users: getUsers(state),
-    pageSize: getPageSize(state),
-    totalUsersCount: getTotalUsersCount(state),
-    currentPage: getCurrentPage(state),
-    portionSize: getPortionSize(state),
-    isFetching: getIsFetching(state),
-    followingInProgress: getFollowingInProgress(state),
-  };
+  return (
+    <div className="user__container">
+      {isFetching ? (
+        <Preloader />
+      ) : (
+        <Users
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+        />
+      )}
+    </div>
+  );
 };
 
-export default connect<MapStatePropsType, MapDispatchPropsType>(
-  mapStateToProps,
-  {
-    followUser,
-    unfollowUser,
-    setUsers: actions.setUsers,
-    setCurrentPage: actions.setCurrentPage,
-    requestUsers,
-    isFetchingToggle: actions.isFetchingToggle,
-  }
-)(UsersContainer);
+export default UsersContainer;

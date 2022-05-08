@@ -1,32 +1,36 @@
-import React from "react";
-import "./Users.scss";
-import Pagination from "../../helpers/pagination/Pagination";
-import { UserType } from "types/user-types";
-import User from "./User";
+import './Users.scss';
 
-type Props = {
-  totalUsersCount: number;
-  pageSize: number;
-  currentPage: number;
-  onPageChange: (pageNumber: number) => void;
-  portionSize: number;
-  users: Array<UserType>;
-  followingInProgress: Array<number>;
-  follow: (id: number) => void;
-  unfollow: (id: number) => void;
-};
+import React from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Users: React.FC<Props> = ({
-  totalUsersCount,
-  pageSize,
-  currentPage,
-  onPageChange,
-  portionSize,
-  users,
-  followingInProgress,
-  follow,
-  unfollow,
-}) => {
+import Pagination from '../../helpers/pagination/Pagination';
+import { getFollowingInProgress, getPortionSize, getTotalUsersCount, getUsers } from '../../redux/selectors/users-selectors';
+import { followUser, unfollowUser } from '../../redux/thunks/usersThunks';
+import User from './User';
+
+type PropsType = {
+  pageSize: number,
+  currentPage: number,
+  onPageChange: (page: number) => void;
+}
+
+const Users: React.FC<PropsType> = ({pageSize, currentPage, onPageChange}) => {
+  const users = useSelector(getUsers);
+  const totalUsersCount = useSelector(getTotalUsersCount);
+  const portionSize = useSelector(getPortionSize);
+  const followingInProgress = useSelector(getFollowingInProgress);
+
+  const dispatch = useDispatch();
+
+  const follow = (userId: number) => {
+    dispatch(followUser(userId))
+  }
+
+  const unfollow = (userId: number) => {
+    dispatch(unfollowUser(userId))
+  }
+
   return (
     <div className="user__list">
       {users.map((user) => (
