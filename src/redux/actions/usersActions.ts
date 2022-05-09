@@ -1,4 +1,6 @@
 import { UserType } from "types/user-types";
+import { FilterType } from '../../components/Forms/user-search-form/UserSearchForm';
+import { SET_USERS_FILTER } from '../../constants/constants';
 import {
   FOLLOW,
   UNFOLLOW,
@@ -29,6 +31,10 @@ export const actions = {
   setCurrentPage: (currentPage: number) => ({
     type: SET_CURRENT_PAGE,
     currentPage,
+  }) as const,
+  setUsersFilter: (filter: FilterType) => ({
+    type: SET_USERS_FILTER,
+    filter,
   }) as const,
   isFetchingToggle: (isFetching: boolean) => ({
     type: IS_FETCHING_TOGGLE,

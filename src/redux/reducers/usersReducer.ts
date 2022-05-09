@@ -9,6 +9,7 @@ import {
   SET_TOTAL_USERS_COUNT,
   IS_FETCHING_TOGGLE,
   FOLLOWING_IN_PROGRESS,
+  SET_USERS_FILTER
 } from "../../constants/constants";
 
 let initialState = {
@@ -19,6 +20,10 @@ let initialState = {
   portionSize: 10,
   isFetching: false,
   followingInProgress: [] as Array<number>, // array of users id
+  filter: {
+    term: "",
+    isFriend: null
+  }
 };
 
 export type InitialStateType = typeof initialState;
@@ -65,6 +70,13 @@ export const usersReducer = (
       return {
         ...state,
         currentPage: action.currentPage,
+      };
+    }
+
+    case SET_USERS_FILTER: {
+      return {
+        ...state,
+        filter: action.filter
       };
     }
 

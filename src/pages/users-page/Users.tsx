@@ -8,11 +8,13 @@ import Pagination from '../../helpers/pagination/Pagination';
 import { getFollowingInProgress, getPortionSize, getTotalUsersCount, getUsers } from '../../redux/selectors/users-selectors';
 import { followUser, unfollowUser } from '../../redux/thunks/usersThunks';
 import User from './User';
+import { FilterType } from '../../components/Forms/user-search-form/UserSearchForm';
 
 type PropsType = {
   pageSize: number,
   currentPage: number,
   onPageChange: (page: number) => void;
+  setUsersFilter: (filter: FilterType) => void;
 }
 
 const Users: React.FC<PropsType> = ({pageSize, currentPage, onPageChange}) => {

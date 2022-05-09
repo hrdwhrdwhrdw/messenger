@@ -29,7 +29,11 @@ test("follow prop should be correct", () => {
     totalUsersCount: 0,
     portionSize: 10,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [],
+    filter: {
+      term: "",
+      isFriend: null
+    }
   }
 
   let action = actions.unfollow(1)

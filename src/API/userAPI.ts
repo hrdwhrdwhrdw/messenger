@@ -2,6 +2,7 @@ import { UserType } from "types/user-types";
 import { instance } from "./instance";
 import { DefaultResponseType } from "../types/response-type";
 import { AxiosPromise } from "axios";
+import { FilterType } from '../components/Forms/user-search-form/UserSearchForm';
 
 type GetUsersType = {
   items: Array<UserType>;
@@ -10,9 +11,9 @@ type GetUsersType = {
 };
 
 export const UsersAPI = {
-  async getUsers(pageSize: number, page: number) {
+  async getUsers(pageSize: number, page: number, filter: FilterType) {
     const res = await instance.get<GetUsersType>(
-      `users?count=${pageSize}&page=${page}`
+      `users?count=${pageSize}&page=${page}&term=${filter.term}&friend=${filter.isFriend}`
     );
     return res.data;
   },
