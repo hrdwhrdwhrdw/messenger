@@ -22,7 +22,7 @@ let initialState = {
   followingInProgress: [] as Array<number>, // array of users id
   filter: {
     term: "",
-    isFriend: null
+    isFriend: null as boolean
   }
 };
 

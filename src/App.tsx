@@ -16,23 +16,22 @@ import Preloader from "./components/Preloader/Preloader";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import CustomButton from "./components/Button/Button";
-import { RootState } from './redux/store/store';
-import {getInitialized} from "./redux/selectors/app-selectors";
+import { RootState } from "./redux/store/store";
+import { getInitialized } from "./redux/selectors/app-selectors";
 
 const UsersContainer = lazy(() => import("./pages/users-page/UsersContainer"));
-const DialogsContainer = lazy(() =>
-  import("./pages/dialogs-page/DialogsContainer")
+const DialogsContainer = lazy(
+  () => import("./pages/dialogs-page/DialogsContainer")
 );
-const ProfileContainer = lazy(() =>
-  import("./pages/profile-page/ProfileContainer")
+const ProfileContainer = lazy(
+  () => import("./pages/profile-page/ProfileContainer")
 );
 const LoginContainer = lazy(() => import("./pages/login-page/LoginContainer"));
 
-type MapStatePropsType = ReturnType<typeof mapStateToProps>
+type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
   setInitializing: () => void;
-}
-
+};
 
 const App: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
   let [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -46,9 +45,12 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
     window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
   }, [props]);
 
-  useLayoutEffect(() => () => {
-    window.removeEventListener("unhandledrejection", catchAllUnhandledErrors);
-  }, [])
+  useLayoutEffect(
+    () => () => {
+      window.removeEventListener("unhandledrejection", catchAllUnhandledErrors);
+    },
+    []
+  );
 
   const expandNav = () => {
     setIsNavExpanded(true);
@@ -108,8 +110,10 @@ let mapStateToProps = (state: RootState) => {
   };
 };
 
-
-const AppContainer = connect<MapStatePropsType, MapDispatchPropsType>(mapStateToProps, { setInitializing })(App);
+const AppContainer = connect<MapStatePropsType, MapDispatchPropsType>(
+  mapStateToProps,
+  { setInitializing }
+)(App);
 
 const MyApp: React.FC = () => {
   return (
