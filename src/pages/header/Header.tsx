@@ -4,6 +4,7 @@ import CustomButton from "../../components/Button/Button";
 import "./Header.scss";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import BuggyButton from "components/ErrorBoundary/BuggyButton";
 
 type PropsType = {
   isNavExpanded: boolean,
@@ -18,6 +19,9 @@ const Header: React.FC<PropsType> = (props) => {
     justifyContent: "center",
     alignItems: "center",
   }
+  const throwError = () => {
+    throw new Error("vd");
+  };
   return (
     <header className={"header" + (props.isNavExpanded ? "" : " hidden")}>
       <div className="header__login">
@@ -32,6 +36,7 @@ const Header: React.FC<PropsType> = (props) => {
               Logout
               <LogoutIcon sx={{ fontSize: "10px", marginLeft: "3px" }} />
             </CustomButton>
+            <BuggyButton />
           </>
         ) : (
           <CustomButton>

@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.scss";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./pages/navbar/Navbar";
@@ -18,6 +18,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import CustomButton from "./components/Button/Button";
 import { RootState } from "./redux/store/store";
 import { getInitialized } from "./redux/selectors/app-selectors";
+import ErrorBoundary from "components/ErrorBoundary/ErrorBoundary";
 
 const UsersContainer = lazy(() => import("./pages/users-page/UsersContainer"));
 const DialogsContainer = lazy(
@@ -27,6 +28,7 @@ const ProfileContainer = lazy(
   () => import("./pages/profile-page/ProfileContainer")
 );
 const LoginContainer = lazy(() => import("./pages/login-page/LoginContainer"));
+const ErrorPage = lazy(() => import("./pages/error-page/ErrorPage"));
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
@@ -36,21 +38,9 @@ type MapDispatchPropsType = {
 const App: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
   let [isNavExpanded, setIsNavExpanded] = useState(false);
 
-  const catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
-    alert("Some error occurred");
-  };
-
   useEffect(() => {
     props.setInitializing();
-    window.addEventListener("unhandledrejection", catchAllUnhandledErrors);
   }, [props]);
-
-  useLayoutEffect(
-    () => () => {
-      window.removeEventListener("unhandledrejection", catchAllUnhandledErrors);
-    },
-    []
-  );
 
   const expandNav = () => {
     setIsNavExpanded(true);
@@ -62,45 +52,50 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
   if (!props.initialized) return <AppPreloader />;
   return (
-    <div className="app-wrapper">
-      <div className="app-wrapper__container">
-        {isNavExpanded ? (
-          <div className="app__open-close wider">
-            <CustomButton>
-              <CloseIcon
-                className="app__icon-menu"
-                onClick={() => shrinkNav()}
-              />
-            </CustomButton>
+    <ErrorBoundary>
+      <div className="app-wrapper">
+        <div className="app-wrapper__container">
+          {isNavExpanded ? (
+            <div className="app__open-close wider">
+              <CustomButton>
+                <CloseIcon
+                  className="app__icon-menu"
+                  onClick={() => shrinkNav()}
+                />
+              </CustomButton>
+            </div>
+          ) : (
+            <div className="app__open-close">
+              <CustomButton>
+                <MenuIcon
+                  className="app__icon-menu"
+                  onClick={() => expandNav()}
+                />
+              </CustomButton>
+            </div>
+          )}
+          <HeaderContainer isNavExpanded={isNavExpanded} />
+          <Navbar isNavExpanded={isNavExpanded} shrinkNav={() => shrinkNav()} />
+          <div
+            className={
+              "app-wrapper__content" + (isNavExpanded ? " hidden" : "")
+            }
+          >
+            <Suspense fallback={<Preloader />}>
+              <Routes>
+                <Route path="/dialogs" element={<DialogsContainer />} />
+                <Route path="/profile/:userId" element={<ProfileContainer />} />
+                <Route path="/" element={<Navigate to="/profile" />} />
+                <Route path="/profile/" element={<ProfileContainer />} />
+                <Route path="/users" element={<UsersContainer />} />
+                <Route path="/login" element={<LoginContainer />} />
+                <Route path="/error" element={<ErrorPage />} />
+              </Routes>
+            </Suspense>
           </div>
-        ) : (
-          <div className="app__open-close">
-            <CustomButton>
-              <MenuIcon
-                className="app__icon-menu"
-                onClick={() => expandNav()}
-              />
-            </CustomButton>
-          </div>
-        )}
-        <HeaderContainer isNavExpanded={isNavExpanded} />
-        <Navbar isNavExpanded={isNavExpanded} shrinkNav={() => shrinkNav()} />
-        <div
-          className={"app-wrapper__content" + (isNavExpanded ? " hidden" : "")}
-        >
-          <Suspense fallback={<Preloader />}>
-            <Routes>
-              <Route path="/dialogs" element={<DialogsContainer />} />
-              <Route path="/profile/:userId" element={<ProfileContainer />} />
-              <Route path="/" element={<Navigate to="/profile" />} />
-              <Route path="/profile/" element={<ProfileContainer />} />
-              <Route path="/users" element={<UsersContainer />} />
-              <Route path="/login" element={<LoginContainer />} />
-            </Routes>
-          </Suspense>
         </div>
       </div>
-    </div>
+    </ErrorBoundary>
   );
 };
 
@@ -121,7 +116,9 @@ const MyApp: React.FC = () => {
       <BrowserRouter>
         <Provider store={store}>
           <MuiThemeProvider muiTheme={getMuiTheme()}>
-            <AppContainer />
+            {/* <ErrorBoundary> */}
+              <AppContainer />
+            {/* </ErrorBoundary> */}
           </MuiThemeProvider>
         </Provider>
       </BrowserRouter>

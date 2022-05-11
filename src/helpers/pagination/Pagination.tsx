@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-
 import styles from "./Pagination.module.scss";
 
 type Props = {

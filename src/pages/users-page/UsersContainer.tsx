@@ -37,15 +37,15 @@ const UsersContainer: React.FC = () => {
     term ? (actualFilter = { ...actualFilter, term: term }) : null;
 
     switch (friend) {
-      case "null": 
-        actualFilter = {...actualFilter, isFriend: null};
+      case "null":
+        actualFilter = { ...actualFilter, isFriend: null };
         break;
-      case "true": 
-        actualFilter = {...actualFilter, isFriend: true};
+      case "true":
+        actualFilter = { ...actualFilter, isFriend: true };
         break;
-      case "false": 
-        actualFilter = {...actualFilter, isFriend: false};
-        break
+      case "false":
+        actualFilter = { ...actualFilter, isFriend: false };
+        break;
     }
     dispatch(requestUsers(pageSize, actualPage, actualFilter));
   }, []);
