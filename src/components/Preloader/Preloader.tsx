@@ -3,9 +3,11 @@ import "./Preloader.scss";
 
 export default function Preloader() {
   return (
-    <div className="push-pop loader">
-      <div></div>
-      <div></div>
+    <div className="preloader">
+      <div className="push-pop loader">
+        <div></div>
+        <div></div>
+      </div>
     </div>
   );
 }
