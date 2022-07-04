@@ -2,12 +2,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-  max-height: 610px;
+  margin-top: 15px;
 
   &__container {
+    padding: 15px;
     height: 100%;
-    max-height: 610px;
     overflow-y: scroll;
   }
 
@@ -26,28 +25,22 @@
     margin-left: 10px;
   }
 
-  &__list {
-    padding-top: 10px;
-    padding-left: 10px;
-  }
-
   &__name {
     margin-bottom: 5px;
+    font-size: 1rem;
   }
 
   &__status {
     margin-bottom: 5px;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 800px) and (min-height: 800px) {
   .user {
-    &__container {
-      max-height: 100%;
-    }
+    
 
     &__list {
-      max-height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -65,27 +58,18 @@
 
 @media (max-width: 450px) {
   .user {
-    &__container {
-      max-height: 100%;
-    }
-
     &__list {
-      max-height: 100%;
       max-height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-    }
+    } 
 
-    &__item {
-      img {
-        width: 40px;
-      }
+    &__container {
+      padding: 6px;
     }
 
     &__button {
-      font-size: .3rem !important;
-      width: 35px;
       min-width: 30px;
       padding: 3px;
     }

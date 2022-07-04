@@ -35,7 +35,6 @@ export const ProfileInfo: React.FC<PropsType & ProfileDataPropsType> = (props) =
         />
         <div className="profile__update-photo">
           {props.isOwner && (
-            <div>
               <CustomButton variant="raised" className="profile__update-button">
                 <label htmlFor="raised-button-file">Upload photo</label>
                 <input
@@ -47,7 +46,6 @@ export const ProfileInfo: React.FC<PropsType & ProfileDataPropsType> = (props) =
                   hidden
                 />
               </CustomButton>
-            </div>
           )}
         </div>
       </div>

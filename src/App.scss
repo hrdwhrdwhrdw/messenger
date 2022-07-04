@@ -15,21 +15,17 @@
         "h h"
         "n c";
       width: 100vw;
-      max-width: 1200px;
+      max-width: 1600px;
       height: 100vh;
-      max-height: 700px;
       margin: 0 auto;
       padding: 12px;
       background-color: #200e1c;
-      border: 3px solid #8169ff;
-      border-radius: 30px;
-      overflow: hidden;
+      overflow-y: hidden;
     }
 
     &__content {
       grid-area: c;
-      height: calc(95vh - 60px);
-      max-height: 610px;
+      height: calc(100vh - 84px);
       width: 100%;
     }
   }
@@ -40,6 +36,7 @@
 
   &__open-close {
     padding: 10px 0 0 10px;
+    display: none;
 
     &.wider {
       background-color: #191621;
@@ -74,9 +71,12 @@
       &__content {
         width: 100%;
         height: 100%;
-        padding-top: 15px;
-        padding-left: 15px;
+        padding-top: 5px;
       }
+    }
+
+    &__open-close {
+      display: block;
     }
 
     &__icon-menu {
@@ -94,12 +94,7 @@
   .app {
     &-wrapper {
       &__content {
-        padding: 5vh 0 0 0;
         max-height: 100%;
-      }
-
-      &__container {
-        padding: 0 2vw 0 0;
       }
     }
   }

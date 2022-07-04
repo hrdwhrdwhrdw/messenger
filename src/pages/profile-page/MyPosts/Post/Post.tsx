@@ -14,7 +14,7 @@ const Post: React.FC<PostType & PropsType> = (props) => {
   return (
     <div className="profile__post">
       <img
-        src="https://steamuserimages-a.akamaihd.net/ugc/1698402776116313451/993A8BB58E84D0960A398BF731A257A4DB09F261/"
+        src="https://sunmarsol.ru/wp-content/uploads/2019/12/%D0%B8%D0%BA%D0%BE%D0%BD%D0%BA%D0%B0-%D0%BC%D0%B0%D0%BB%D1%8C%D1%87%D0%B8%D0%BA.jpg"
         alt=""
         className="post__image"
       />

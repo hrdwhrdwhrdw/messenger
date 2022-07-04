@@ -5,6 +5,7 @@
   width: 100%;
   padding-left: 10px;
   overflow-y: scroll;
+  position: relative;
 
   &__wrapper {
     height: 100%;
@@ -12,14 +13,12 @@
   }
 
   &__photo {
-    width: 40%;
     position: relative;
 
     &-image {
       width: 100%;
-      max-height: 380px;
-      border: 5px solid $purple;
-      border-radius: 20px;
+      max-width: 400px;
+      border: 2px solid $purple;
     }
   }
 
@@ -27,12 +26,12 @@
     position: relative;
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
     height: 570px;
     width: 100%;
 
     &-container {
-      margin-left: 5vw;
-      width: 40%;
+      width: 52%;
 
       span {
         margin-right: 10px;
@@ -46,7 +45,7 @@
   }
 
   &__name {
-    font-size: 1.8rem !important;
+    font-size: 2.8rem !important;
   }
 
   &__edit-button {
@@ -67,7 +66,9 @@
     position: absolute;
     width: 50%;
     bottom: 20px;
-    left: 25%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 
     button {
       padding: 0;
@@ -87,9 +88,10 @@
   }
 
   &__posts {
+    position: absolute;
     width: 45%;
     max-width: 500px;
-    margin-top: -18vh;
+    top: 400px;
 
     &.higher {
       margin-top: -14%;
@@ -97,7 +99,7 @@
   }
 
   &__post {
-    padding: 10px;
+    padding: 6px;
     background-color: transparent;
     background-color: $burgundy;
     border-radius: 5px;
@@ -114,6 +116,10 @@
     &-inner {
       width: 100%;
       height: 100%;
+    }
+
+    &-text {
+      font-size: 1rem;
     }
   }
 }
@@ -134,10 +140,10 @@
   &__item {
     display: flex;
     align-items: center;
-    height: 40px;
+    margin: 1.25rem 0;
 
     span {
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
   }
 
@@ -228,14 +234,6 @@
   transition: 0.3s ease all;
 }
 
-@media (max-width: 1024px) {
-  .profile {
-    &__posts {
-      margin-top: calc(35vh - 450px);
-    }
-  }
-}
-
 @media (max-width: 800px) {
   .profile {
     &__update-photo {
@@ -243,17 +241,13 @@
         font-size: 8px;
       }
     }
-
-    &__posts {
-      margin-top: -300px;
-    }
   }
 }
 
 @media (max-width: 768px) {
   .profile {
     &__posts {
-      margin-top: -270px;
+      top: 300px;
     }
 
     &__post {
@@ -264,7 +258,6 @@
 
     &__info {
       &-container {
-        margin-left: 10vw;
 
         svg {
           font-size: 1rem;
@@ -284,16 +277,21 @@
 @media (max-width: 450px) {
   .profile {
     &__posts {
-      margin-top: -55vh;
-
+      top: 550px;
+      width: 95%;
       textarea {
         font-size: 0.5rem;
       }
     }
-
+    &__photo-image {
+      width: 120px;
+      border-radius: 50%;
+    }
     &__info {
       &-container {
-        width: 50%;
+        width: 65%;
+      margin-left: 20px;
+
       }
     }
 
@@ -301,7 +299,7 @@
       padding: 5px;
 
       .wider {
-        width: 30px;
+        width: 42px;
       }
     }
 
@@ -315,9 +313,9 @@
     }
 
     &__post {
+      height: 65px;
       img {
-        width: 25px;
-        height: 25px;
+        height: 100%;
         border: 1px solid #788fdc;
       }
     }
@@ -331,7 +329,7 @@
 
     &__button {
       padding: 0 !important;
-      font-size: 8px;
+      font-size: .8rem;
       width: 40px;
     }
 
@@ -363,20 +361,33 @@
 
   .contact {
     &__title {
-      font-size: .7rem;
+      font-size: .85rem;
     }
 
     &__item {
-      height: 25px;
 
       span {
-        font-size: .5rem;
+        font-size: .8rem;
       }
 
       svg {
         width: 8px;
         height: 8px;
       }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .profile {
+    &__info {
+      flex-direction: column;
+      &-container {
+        margin: 15px 0 0 0;
+      }
+    }
+    &__posts {
+      top: 690px;
     }
   }
 }

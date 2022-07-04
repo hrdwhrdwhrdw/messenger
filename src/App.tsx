@@ -116,9 +116,7 @@ const MyApp: React.FC = () => {
       <BrowserRouter>
         <Provider store={store}>
           <MuiThemeProvider muiTheme={getMuiTheme()}>
-            {/* <ErrorBoundary> */}
               <AppContainer />
-            {/* </ErrorBoundary> */}
           </MuiThemeProvider>
         </Provider>
       </BrowserRouter>

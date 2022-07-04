@@ -7,10 +7,9 @@ li {
 .navbar {
   grid-area: n;
   background: #191621;
-  height: calc(95vh - 60px);
-  max-height: 610px;
   border-radius: 10px;
   width: 100%;
+  height: calc(100vh - 84px);
 
   &__item {
     margin: 15px;
@@ -66,11 +65,6 @@ li {
       width: 100%;
       margin: 0;
       border-radius: 0;
-      border-bottom: 2px solid #7969ff;
-
-      &:first-child {
-        border-top: 2px solid #7969ff;
-      }
 
       a {
         justify-content: center;

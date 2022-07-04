@@ -14,6 +14,13 @@ $heart: #f74888;
 
   &__info {
     margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  &__description {
+    font-size: 1rem;
   }
 
   &__button {
@@ -38,6 +45,7 @@ $heart: #f74888;
     margin-left: 5px;
     padding-right: 5px;
     color: $grey;
+    font-size: 1rem;
 
     &.liked {
       color: #f74888;
@@ -48,7 +56,7 @@ $heart: #f74888;
 .like-button {
   position: relative !important;
   width: 1.1rem !important;
-  height: 1.1rem !important; //24px
+  height: 1.1rem !important;
   border-radius: 50% !important;
   background: $grey !important;
   display: flex !important;
@@ -60,8 +68,8 @@ $heart: #f74888;
   padding: 0.3rem !important;
 
   svg {
-    width: 0.55em; // 14px
-    height: 0.55em;
+    width: 0.55rem;
+    height: 0.55rem;
   }
 }
 
@@ -161,6 +169,8 @@ $heart: #f74888;
 
       &.is-liked {
         display: block !important;
+        width: 10px;
+        height: 10px;
       }
     }
   }
@@ -171,7 +181,7 @@ $heart: #f74888;
     &__button {
       &-container {
         padding: 2px;
-        width: 20px;
+        width: 32px;
 
         svg {
           width: 5px;
@@ -179,8 +189,8 @@ $heart: #f74888;
         }
 
         button {
-          width: 7px !important;
-          height: 7px !important;
+          width: 16px !important;
+          height: 16px !important;
         }
       }
     }
