@@ -15,7 +15,7 @@ const LoginForm: React.FC<
     LoginFormOwnPropsType
 > = ({ handleSubmit, error, captchaURL }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="login__form">
       <div className="login__input-container">
         <Field
           placeholder="login"
@@ -46,7 +46,7 @@ const LoginForm: React.FC<
       {captchaURL && (
         <Field name="captcha" component={CustomInput} validate={[required]} />
       )}
-      <CustomButton type="submit" sx={{ width: "100%", marginTop: "1rem" }}>
+      <CustomButton type="submit" sx={{ width: "50%", marginTop: "1rem", alignSelf: "center"}}>
         Log In
       </CustomButton>
     </form>
