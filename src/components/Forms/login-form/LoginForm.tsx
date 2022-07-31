@@ -18,7 +18,7 @@ const LoginForm: React.FC<
     <form onSubmit={handleSubmit} className="login__form">
       <div className="login__input-container">
         <Field
-          placeholder="login"
+          placeholder="free@samuraijs.com"
           name="login"
           validate={[required, maxLength50]}
           component={CustomInput}
@@ -26,7 +26,7 @@ const LoginForm: React.FC<
       </div>
       <div className="login__input-container">
         <Field
-          placeholder="password"
+          placeholder="free"
           name="password"
           validate={[required, maxLength50]}
           component={CustomInput}
